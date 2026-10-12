@@ -12,7 +12,7 @@ import net.bummy1337.daintegrate.sensitives.TwitchBitsSensitiveProperties;
 import net.bummy1337.daintegrate.sensitives.TwitchPointsSensitiveProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -337,7 +337,7 @@ public class DonationTypeEntry implements IEntry {
     }
 
     @Override
-    public void drawEntry(GuiGraphicsExtractor graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
+    public void drawEntry(GuiGraphics graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
         int cardW = right - x - 12;
         int entryH = getHeightE();
         boolean hovered = mouseX >= x && mouseX <= x + cardW && mouseY >= y && mouseY <= y + entryH;
@@ -422,7 +422,7 @@ public class DonationTypeEntry implements IEntry {
         return rowY + (rowH - elementH) / 2;
     }
 
-    private int renderPreview(GuiGraphicsExtractor graphics, int x, int y, int width) {
+    private int renderPreview(GuiGraphics graphics, int x, int y, int width) {
         boolean hasMessage = !messages.isEmpty() && !messages.get(0).line.getText().isEmpty();
         boolean hasCommand = !commands.isEmpty() && !commands.get(0).line.getText().isEmpty();
         if (!hasMessage && !hasCommand) return y;
@@ -585,7 +585,7 @@ public class DonationTypeEntry implements IEntry {
             line.tag = tag;
         }
 
-        public void drawElement(GuiGraphicsExtractor graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
+        public void drawElement(GuiGraphics graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
             line.renderButton(graphics, x, y, partialTicks);
             delete.drawButton(graphics, mc, x + 218, centerY(y, 20, 14), mouseX, mouseY, partialTicks);
         }

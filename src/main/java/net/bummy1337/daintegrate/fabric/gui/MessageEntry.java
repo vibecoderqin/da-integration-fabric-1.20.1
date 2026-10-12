@@ -1,7 +1,7 @@
 package net.bummy1337.daintegrate.fabric.gui;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class MessageEntry implements IEntry {
     }
 
     @Override
-    public void drawEntry(GuiGraphicsExtractor graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
+    public void drawEntry(GuiGraphics graphics, int x, int y, int mouseX, int mouseY, float partialTicks) {
         int cardH = getHeightE() - 4;
         boolean hovered = mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + cardH;
         Theme.fillCard(graphics, x, y, width, cardH, hovered);
