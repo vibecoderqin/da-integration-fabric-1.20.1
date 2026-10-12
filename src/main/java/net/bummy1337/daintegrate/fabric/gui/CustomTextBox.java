@@ -365,10 +365,10 @@ public class CustomTextBox extends AbstractWidget {
             int bgColor = focused ? Theme.BG_INPUT_FOCUS : Theme.BG_INPUT;
             int borderColor = focused ? Theme.BORDER_FOCUS : Theme.BORDER;
             graphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, bgColor);
-            graphics.outline(this.getX(), this.getY(), this.width, this.height, borderColor);
+            graphics.renderOutline(this.getX(), this.getY(), this.width, this.height, borderColor);
 
             if (tag != null && !tag.isEmpty()) {
-                graphics.text(font, FontHelper.comp(tag), getX(), getY() - 10, Theme.TEXT_MUTED, false);
+                graphics.drawString(font, FontHelper.comp(tag), getX(), getY() - 10, Theme.TEXT_MUTED, false);
             }
             int i2 = this.isEditable ? this.textColor : this.textColorUneditable;
             int j = this.cursorPos - this.displayPos;
@@ -384,7 +384,7 @@ public class CustomTextBox extends AbstractWidget {
             }
             if (!s.isEmpty()) {
                 String s1 = flag ? s.substring(0, j) : s;
-                graphics.text(font, FontHelper.comp(s1), l, i1, i2, false);
+                graphics.drawString(font, FontHelper.comp(s1), l, i1, i2, false);
                 j1 = l + FontHelper.width(font, s1);
             }
             boolean flag2 = this.cursorPos < this.value.length() || this.value.length() >= this.getMaxLength();
@@ -397,10 +397,10 @@ public class CustomTextBox extends AbstractWidget {
             }
             if (!s.isEmpty() && flag && j < s.length()) {
                 String s2 = s.substring(j);
-                graphics.text(font, FontHelper.comp(s2), j1, i1, i2, false);
+                graphics.drawString(font, FontHelper.comp(s2), j1, i1, i2, false);
             }
             if (this.value.isEmpty() && this.suggestion != null) {
-                graphics.text(font, FontHelper.comp(this.suggestion), l, i1, Theme.TEXT_MUTED, false);
+                graphics.drawString(font, FontHelper.comp(this.suggestion), l, i1, Theme.TEXT_MUTED, false);
             }
             if (flag1) {
                 graphics.fill(k1, i1 - 1, k1 + 1, i1 + 1 + 9, Theme.ACCENT);
@@ -540,7 +540,7 @@ public class CustomTextBox extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderButton(graphics);
     }
 }

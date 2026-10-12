@@ -35,13 +35,13 @@ public class CustomButton extends AbstractWidget {
     }
 
     public void drawButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
+        renderWidget(graphics, mouseX, mouseY, partialTicks);
     }
 
     public void drawButton(GuiGraphics graphics, Minecraft mc, int x, int y, int mouseX, int mouseY, float partialTicks) {
         this.setX(x);
         this.setY(y);
-        extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
+        renderWidget(graphics, mouseX, mouseY, partialTicks);
     }
 
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
@@ -58,7 +58,7 @@ public class CustomButton extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderContents(graphics, mouseX, mouseY, delta);
     }
 
@@ -87,12 +87,12 @@ public class CustomButton extends AbstractWidget {
                 graphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, colorBg);
             }
             if (ShowOutline) {
-                graphics.outline(this.getX(), this.getY(), this.width, this.height, colorOutline);
+                graphics.renderOutline(this.getX(), this.getY(), this.width, this.height, colorOutline);
             }
             Component message = this.getMessage();
             String textStr = message.getString();
             int textWidth = FontHelper.width(fontrenderer, textStr);
-            graphics.text(fontrenderer, FontHelper.comp(textStr),
+            graphics.drawString(fontrenderer, FontHelper.comp(textStr),
                     this.getX() + (this.width - textWidth) / 2,
                     this.getY() + (this.height - 8) / 2,
                     colorFg, false);
