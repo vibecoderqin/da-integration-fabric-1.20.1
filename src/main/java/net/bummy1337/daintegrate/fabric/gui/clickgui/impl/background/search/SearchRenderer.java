@@ -116,7 +116,7 @@ public class SearchRenderer {
         RenderHelper.roundedRect(g, itemX, itemY, itemW, resultHeight, 4f, bg);
 
         if (selected) {
-            RenderHelper.outline(g, itemX, itemY, itemW, resultHeight, 0.5f,
+            RenderHelper.renderOutline(g, itemX, itemY, itemW, resultHeight, 0.5f,
                     Theme.withAlpha(Theme.ACCENT, (int) (100 * itemAlpha)));
         }
 
