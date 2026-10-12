@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -34,11 +34,11 @@ public class CustomButton extends AbstractWidget {
         this.onClick = onClick;
     }
 
-    public void drawButton(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
     }
 
-    public void drawButton(GuiGraphicsExtractor graphics, Minecraft mc, int x, int y, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(GuiGraphics graphics, Minecraft mc, int x, int y, int mouseX, int mouseY, float partialTicks) {
         this.setX(x);
         this.setY(y);
         extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
@@ -59,11 +59,11 @@ public class CustomButton extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderContents(graphics, mouseX, mouseY, delta);
     }
 
-    private void renderContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
+    private void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             Font fontrenderer = Minecraft.getInstance().font;
             this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;

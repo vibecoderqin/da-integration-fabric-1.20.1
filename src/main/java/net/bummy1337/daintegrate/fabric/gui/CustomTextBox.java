@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -359,7 +359,7 @@ public class CustomTextBox extends AbstractWidget {
         this.setFocused(focused);
     }
 
-    public void renderButton(GuiGraphicsExtractor graphics) {
+    public void renderButton(GuiGraphics graphics) {
         if (this.isVisible()) {
             boolean focused = this.isFocused();
             int bgColor = focused ? Theme.BG_INPUT_FOCUS : Theme.BG_INPUT;
@@ -412,13 +412,13 @@ public class CustomTextBox extends AbstractWidget {
         }
     }
 
-    public void renderButton(GuiGraphicsExtractor graphics, int x, int y, float partialTicks) {
+    public void renderButton(GuiGraphics graphics, int x, int y, float partialTicks) {
         this.setX(x);
         this.setY(y + 10);
         renderButton(graphics);
     }
 
-    private void renderHighlight(GuiGraphicsExtractor graphics, int x1, int y1, int x2, int y2) {
+    private void renderHighlight(GuiGraphics graphics, int x1, int y1, int x2, int y2) {
         if (x1 < x2) {
             int i = x1;
             x1 = x2;
@@ -540,7 +540,7 @@ public class CustomTextBox extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderButton(graphics);
     }
 }
