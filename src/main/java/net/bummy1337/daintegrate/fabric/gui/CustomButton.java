@@ -5,7 +5,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public class CustomButton extends AbstractWidget {
@@ -44,7 +44,6 @@ public class CustomButton extends AbstractWidget {
         extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
     }
 
-    @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (this.active && this.visible && event.input() == 0) {
             if (event.x() >= this.getX() && event.y() >= this.getY()

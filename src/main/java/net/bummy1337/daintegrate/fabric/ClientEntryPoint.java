@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -137,17 +137,17 @@ public class ClientEntryPoint implements ClientModInitializer {
     }
 
     private void registerCommands(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(ClientCommands.literal("da")
-                .then(ClientCommands.literal("set")
+        dispatcher.register(ClientCommandManager.literal("da")
+                .then(ClientCommandManager.literal("set")
                         .executes(this::setCommand)
                 )
-                .then(ClientCommands.literal("connect")
+                .then(ClientCommandManager.literal("connect")
                         .executes(this::connectCommand)
                 )
-                .then(ClientCommands.literal("disconnect")
+                .then(ClientCommandManager.literal("disconnect")
                         .executes(this::disconnectCommand)
                 )
-                .then(ClientCommands.literal("status")
+                .then(ClientCommandManager.literal("status")
                         .executes(this::statusCommand)
                 )
         );

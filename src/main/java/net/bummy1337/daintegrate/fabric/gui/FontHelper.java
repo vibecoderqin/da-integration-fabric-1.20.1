@@ -2,18 +2,13 @@ package net.bummy1337.daintegrate.fabric.gui;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 
-public class FontHelper {
-    public static final Identifier FONT_ID =
-            Identifier.fromNamespaceAndPath("daintegratew", "montserrat");
+public final class FontHelper {
+    private static boolean fontAvailable;
 
-    private static final FontDescription FONT_DESC = new FontDescription.Resource(FONT_ID);
-
-    private static boolean fontAvailable = false;
+    private FontHelper() {}
 
     public static void setFontAvailable(boolean value) {
         fontAvailable = value;
@@ -23,31 +18,23 @@ public class FontHelper {
         return fontAvailable;
     }
 
+    /**
+     * The 1.20.1 text API does not support the newer FontDescription API.
+     * Use ordinary vanilla text while retaining the shared rendering helpers.
+     */
     public static Component comp(String text) {
-        String safe = text != null ? text : "";
-        if (!fontAvailable)
-            return Component.literal(safe);
-        return Component.literal(safe).withStyle(Style.EMPTY.withFont(FONT_DESC));
+        return Component.literal(text != null ? text : "");
     }
 
     public static Component comp(String text, int color) {
-        String safe = text != null ? text : "";
-        if (!fontAvailable)
-            return Component.literal(safe).withStyle(Style.EMPTY.withColor(color));
-        return Component.literal(safe).withStyle(Style.EMPTY.withFont(FONT_DESC).withColor(color));
+        return Component.literal(text != null ? text : "").withStyle(Style.EMPTY.withColor(color));
     }
 
     public static FormattedCharSequence seq(String text) {
-        String safe = text != null ? text : "";
-        if (!fontAvailable)
-            return FormattedCharSequence.forward(safe, Style.EMPTY);
-        return FormattedCharSequence.forward(safe, Style.EMPTY.withFont(FONT_DESC));
+        return FormattedCharSequence.forward(text != null ? text : "", Style.EMPTY);
     }
 
     public static int width(Font font, String text) {
-        if (text == null) return 0;
-        if (!fontAvailable)
-            return font.width(text);
-        return font.width(comp(text));
+        return text == null ? 0 : font.width(text);
     }
 }
