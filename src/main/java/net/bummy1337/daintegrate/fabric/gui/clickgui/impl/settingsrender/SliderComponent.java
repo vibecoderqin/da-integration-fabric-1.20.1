@@ -144,7 +144,7 @@ public class SliderComponent extends AbstractSettingComponent {
         float combinedOutlineAlpha = Math.max(hoverAnimation * 0.4f, inputAnimation);
         if (combinedOutlineAlpha > 0.01f) {
             int outlineAlpha = clampAlpha(180 * combinedOutlineAlpha * alphaMultiplier);
-            RenderHelper.renderOutline(g, inputBoxX, inputBoxY, inputBoxWidth, inputBoxHeight,
+            RenderHelper.outline(g, inputBoxX, inputBoxY, inputBoxWidth, inputBoxHeight,
                     0.1f, Theme.withAlpha(Theme.BORDER, outlineAlpha));
         }
 

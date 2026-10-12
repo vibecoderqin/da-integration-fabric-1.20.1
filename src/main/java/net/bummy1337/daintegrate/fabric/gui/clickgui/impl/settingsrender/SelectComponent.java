@@ -146,7 +146,7 @@ public class SelectComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BG_INPUT, (int)(bgAlpha * alphaMultiplier)));
 
         int outlineAlpha = 60 + (int)(hoverAnimation * 40);
-        RenderHelper.renderOutline(g, boxX, boxY, BOX_WIDTH, boxHeight, 0.5f,
+        RenderHelper.outline(g, boxX, boxY, BOX_WIDTH, boxHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, (int)(outlineAlpha * alphaMultiplier)));
 
         renderAnimatedSelectedText(g, font, boxX, boxY, boxHeight);
@@ -295,7 +295,7 @@ public class SelectComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BG_PANEL, panelBgAlpha));
 
         int panelOutlineAlpha = (int)(100 * panelAlpha);
-        RenderHelper.renderOutline(g, boxX, startY, BOX_WIDTH, visibleHeight, 0.5f,
+        RenderHelper.outline(g, boxX, startY, BOX_WIDTH, visibleHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, panelOutlineAlpha));
 
         if (visibleHeight < 1f) return;
@@ -336,7 +336,7 @@ public class SelectComponent extends AbstractSettingComponent {
                     Theme.withAlpha(Theme.BG_INPUT, checkBgAlpha));
 
             int checkOutlineAlpha = (int)((80 + hoverAnim * 40) * panelAlpha);
-            RenderHelper.renderOutline(g, checkX, checkY, checkSize, checkSize, 0.5f,
+            RenderHelper.outline(g, checkX, checkY, checkSize, checkSize, 0.5f,
                     Theme.withAlpha(Theme.BORDER, checkOutlineAlpha));
 
             if (selectAnim > 0.01f) {

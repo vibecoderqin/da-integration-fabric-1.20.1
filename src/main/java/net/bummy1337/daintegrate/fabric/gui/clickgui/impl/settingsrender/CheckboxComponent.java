@@ -71,7 +71,7 @@ public class CheckboxComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BG_INPUT, (int)(25 * alphaMultiplier)));
 
         int outlineAlpha = 60 + (int)(hoverAnimation * 40);
-        RenderHelper.renderOutline(g, checkboxX, checkboxY, checkboxWidth, checkboxSize, 0.5f,
+        RenderHelper.outline(g, checkboxX, checkboxY, checkboxWidth, checkboxSize, 0.5f,
                 Theme.withAlpha(Theme.BORDER, (int)(outlineAlpha * alphaMultiplier)));
 
         float knobBaseSize = checkboxSize - 3;
