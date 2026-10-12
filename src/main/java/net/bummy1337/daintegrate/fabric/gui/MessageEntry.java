@@ -66,14 +66,14 @@ public class MessageEntry implements IEntry {
         int innerX = x + 12;
         int offset = y + 5;
 
-        graphics.text(fontRenderer, FontHelper.comp(userName), innerX, offset, Theme.TEXT_PRIMARY, false);
+        graphics.drawString(fontRenderer, FontHelper.comp(userName), innerX, offset, Theme.TEXT_PRIMARY, false);
         String amtText = amount + " " + currency;
         int amtW = FontHelper.width(fontRenderer, amtText);
-        graphics.text(fontRenderer, FontHelper.comp(amtText), x + width - amtW - 8, offset, Theme.YELLOW, false);
+        graphics.drawString(fontRenderer, FontHelper.comp(amtText), x + width - amtW - 8, offset, Theme.YELLOW, false);
         offset += 14;
 
         for (String line : messageLines) {
-            graphics.text(fontRenderer, FontHelper.comp(line), innerX, offset, Theme.TEXT_SECONDARY, false);
+            graphics.drawString(fontRenderer, FontHelper.comp(line), innerX, offset, Theme.TEXT_SECONDARY, false);
             offset += 10;
         }
     }
