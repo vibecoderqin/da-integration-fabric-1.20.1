@@ -6,7 +6,7 @@ import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.handler.TriggerAnimationHandler;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.handler.TriggerScrollHandler;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.util.TriggerDisplayHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class TriggerListRenderer {
         this.displayHelper = displayHelper;
     }
 
-    public void render(GuiGraphicsExtractor g, List<TriggerDto> displayTriggers, TriggerDto selectedTrigger,
+    public void render(GuiGraphics g, List<TriggerDto> displayTriggers, TriggerDto selectedTrigger,
                        float x, float y, float width, float height,
                        float mouseX, float mouseY, int guiScale, float alphaMultiplier,
                        TriggerAnimationHandler animHandler, TriggerScrollHandler scrollHandler) {
@@ -80,7 +80,7 @@ public class TriggerListRenderer {
                 scrollHandler.getTriggerScrollBottomFade() * alphaMultiplier, 80, 15);
     }
 
-    private void renderTriggerItems(GuiGraphicsExtractor g, List<TriggerDto> triggerList, Map<TriggerDto, Float> animations,
+    private void renderTriggerItems(GuiGraphics g, List<TriggerDto> triggerList, Map<TriggerDto, Float> animations,
                                     TriggerDto selectedTrigger,
                                     float x, float y, float width, float height, float mouseX, float mouseY,
                                     float alphaMultiplier, float offsetX, float scale, float scrollOffset,
@@ -197,7 +197,7 @@ public class TriggerListRenderer {
         }
     }
 
-    private void renderScrollFade(GuiGraphicsExtractor g, float x, float y, float w, float h, float topFade, float bottomFade, int alpha, int size) {
+    private void renderScrollFade(GuiGraphics g, float x, float y, float w, float h, float topFade, float bottomFade, int alpha, int size) {
         if (topFade > 0.01f) {
             for (int i = 0; i < size; i++) {
                 float fadeAlpha = alpha * topFade * (1f - i / (float) size);

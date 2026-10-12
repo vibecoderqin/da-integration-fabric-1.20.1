@@ -18,7 +18,7 @@ import net.bummy1337.dontaionalerts.DonationAlertsClient;
 import net.bummy1337.dontaionalerts.ReadOnlyDonationAlertsEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
@@ -266,7 +266,7 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (!initialized) return;
 
         graphics.fill(0, 0, this.width, this.height, 0xB0000000);
@@ -347,7 +347,7 @@ public class MainScreen extends Screen {
         renderAllButtons(graphics, mouseX, mouseY, delta);
     }
 
-    private void renderAllButtons(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+    private void renderAllButtons(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (btnClose != null) btnClose.drawButton(graphics, mouseX, mouseY, delta);
         if (btnHelp != null) btnHelp.drawButton(graphics, mouseX, mouseY, delta);
         if (btnExport != null) btnExport.drawButton(graphics, mouseX, mouseY, delta);
