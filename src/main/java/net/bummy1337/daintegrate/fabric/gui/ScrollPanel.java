@@ -39,7 +39,6 @@ public class ScrollPanel<T extends IEntry> extends AbstractWidget {
         this.setX(x);
         this.setY(y);
         this.setWidth(right - x);
-        this.setHeight(bottom - y);
     }
 
     public void drawPanel(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {

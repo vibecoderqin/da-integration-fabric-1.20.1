@@ -48,7 +48,7 @@ public class CustomButton extends AbstractWidget {
         if (this.active && this.visible && event.input() == 0) {
             if (event.x() >= this.getX() && event.y() >= this.getY()
                     && event.x() < this.getX() + this.width && event.y() < this.getY() + this.height) {
-                playButtonClickSound(Minecraft.getInstance().getSoundManager());
+                playDownSound(Minecraft.getInstance().getSoundManager());
                 if (onClick != null)
                     onClick.run();
                 return true;

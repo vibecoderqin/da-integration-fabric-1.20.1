@@ -143,11 +143,11 @@ public class TriggerListRenderer {
                 int b = (int) Math.min(255, 80 + 20 * pulseValue + 40 * highlightBoost);
                 int outlineArgb = 0xFF000000 | (r << 16) | (gVal << 8) | b;
                 int outlineColor = (outlineArgb & 0x00FFFFFF) | ((outlineAlpha & 0xFF) << 24);
-                RenderHelper.renderOutline(g, animX, scaledTriggerY, scaledWidth, scaledHeight, 0.5f, outlineColor);
+                RenderHelper.outline(g, animX, scaledTriggerY, scaledWidth, scaledHeight, 0.5f, outlineColor);
             } else if (hoverAnim > 0.01f) {
                 int outlineAlpha = (int) (60 * hoverAnim * combinedAlpha);
                 int outlineColor = Theme.withAlpha(Theme.TEXT_SECONDARY, outlineAlpha);
-                RenderHelper.renderOutline(g, animX, scaledTriggerY, scaledWidth, scaledHeight, 0.5f, outlineColor);
+                RenderHelper.outline(g, animX, scaledTriggerY, scaledWidth, scaledHeight, 0.5f, outlineColor);
             }
 
             float stateTextOffset = stateAnim * STATE_TEXT_OFFSET;

@@ -124,7 +124,7 @@ public class ClickGui extends Screen {
         RenderHelper.setFont(Minecraft.getInstance().font);
 
         Minecraft mc = Minecraft.getInstance();
-        long handle = mc.getWindow().handle();
+        long handle = mc.getWindow().getWindow();
         double centerX = mc.getWindow().getWidth() / 2.0;
         double centerY = mc.getWindow().getHeight() / 2.0;
         GLFW.glfwSetCursorPos(handle, centerX, centerY);
@@ -447,7 +447,7 @@ public class ClickGui extends Screen {
             g.fill(0, 0, width, height, (dimAlpha << 24));
         }
 
-        float scale = (float) FIXED_GUI_SCALE / Math.max(1, mc.getWindow().getGuiScale());
+        float scale = (float) (FIXED_GUI_SCALE / Math.max(1.0, mc.getWindow().getGuiScale()));
         float mx = mouseX / scale;
         float my = mouseY / scale;
 
@@ -710,7 +710,7 @@ public class ClickGui extends Screen {
         if (closing) return false;
 
         Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, mc.getWindow().getGuiScale());
+        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
         float scale = (float) FIXED_GUI_SCALE / guiScale;
         double mx = event.x() / scale;
         double my = event.y() / scale;
@@ -829,7 +829,7 @@ public class ClickGui extends Screen {
         if (closing) return false;
 
         Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, mc.getWindow().getGuiScale());
+        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
         float scale = (float) FIXED_GUI_SCALE / guiScale;
         double mx = mouseX / scale;
         double my = mouseY / scale;
@@ -949,7 +949,7 @@ public class ClickGui extends Screen {
             startAnimation(false);
 
             Minecraft mc = Minecraft.getInstance();
-            long handle = mc.getWindow().handle();
+            long handle = mc.getWindow().getWindow();
             double centerX = mc.getWindow().getWidth() / 2.0;
             double centerY = mc.getWindow().getHeight() / 2.0;
 
