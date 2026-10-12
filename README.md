@@ -8,23 +8,29 @@ A Minecraft **Fabric client mod** port of [bUmmy1337/da-integration](https://git
 - Configurable message and command handlers.
 - Trigger and donation history screens.
 - In-game settings UI and click GUI.
-- Client commands: `/da set`, `/da connect`, `/da disconnect`, and `/da status`.
+- Client commands for connecting to DonationAlerts and managing integration settings.
 
-## Build
+## Installation
 
-A push or pull request runs the GitHub Actions build workflow. It builds with Java 17 and Gradle, then uploads the mod JAR as a workflow artifact.
+1. Use Minecraft **1.20.1** with Fabric Loader and Fabric API installed.
+2. Download `daintegrate-1.2.0.jar` from the workflow artifact linked below.
+3. Put the JAR in the instance's `mods` folder and launch the game.
 
-To build locally, install JDK 17 and Gradle 8.7, then run:
+[Successful GitHub Actions build and artifact](https://github.com/vibecoderqin/da-integration-fabric-1.20.1/actions/runs/38199333835)
+
+## Build locally
+
+Install JDK 17 and Gradle 8.7, then run:
 
 ```sh
-gradle clean build
+gradle --no-daemon clean build
 ```
 
-The built mod JAR is written to `build/libs/`.
+The built mod JAR is written to `build/libs/daintegrate-1.2.0.jar`.
 
 ## Status
 
-This repository is a compatibility port from a newer Minecraft/Fabric API. The initial source import is being validated against Minecraft 1.20.1; do not consider the JAR production-ready until the workflow passes and the mod has been tested in-game.
+The Minecraft 1.20.1 / Java 17 project has passed the GitHub Actions compilation and JAR packaging workflow. The mod has **not yet been runtime-tested in a live Minecraft client**, so verify the DonationAlerts connection and in-game screens in your own instance before relying on it.
 
 ## Credits and license
 
