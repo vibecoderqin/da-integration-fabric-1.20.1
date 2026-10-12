@@ -20,7 +20,7 @@ public class CheckBox extends CustomButton {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             Font fontrenderer = Minecraft.getInstance().font;
             this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
@@ -35,7 +35,7 @@ public class CheckBox extends CustomButton {
                 trackColor = Flag ? Theme.ACCENT_HOVER : Theme.BG_ENTRY_HOVER;
 
             Theme.fillRounded(graphics, switchX, switchY, switchW, switchH, 7, trackColor);
-            graphics.outline(switchX, switchY, switchW, switchH, Flag ? Theme.ACCENT_HOVER : Theme.BORDER);
+            graphics.renderOutline(switchX, switchY, switchW, switchH, Flag ? Theme.ACCENT_HOVER : Theme.BORDER);
 
             int knobSize = 10;
             int knobX = Flag ? switchX + switchW - knobSize - 2 : switchX + 2;
@@ -43,7 +43,7 @@ public class CheckBox extends CustomButton {
             Theme.fillRounded(graphics, knobX, knobY, knobSize, knobSize, 5, Flag ? Theme.WHITE : Theme.TEXT_MUTED);
 
             Component message = this.getMessage();
-            graphics.text(fontrenderer, FontHelper.comp(message.getString()),
+            graphics.drawString(fontrenderer, FontHelper.comp(message.getString()),
                     getX() + switchW + 8, getY() + (height / 2) - 4,
                     Flag ? Theme.TEXT_PRIMARY : Theme.TEXT_SECONDARY, false);
         }

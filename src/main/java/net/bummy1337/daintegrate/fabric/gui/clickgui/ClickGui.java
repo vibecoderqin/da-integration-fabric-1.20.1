@@ -26,9 +26,9 @@ import net.bummy1337.daintegrate.sensitives.TwitchPointsSensitiveProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.bummy1337.dontaionalerts.DonationAlertsClient;
 import net.bummy1337.dontaionalerts.ReadOnlyDonationAlertsEvent;
@@ -124,7 +124,7 @@ public class ClickGui extends Screen {
         RenderHelper.setFont(Minecraft.getInstance().font);
 
         Minecraft mc = Minecraft.getInstance();
-        long handle = mc.getWindow().handle();
+        long handle = mc.getWindow().getWindow();
         double centerX = mc.getWindow().getWidth() / 2.0;
         double centerY = mc.getWindow().getHeight() / 2.0;
         GLFW.glfwSetCursorPos(handle, centerX, centerY);
@@ -428,7 +428,7 @@ public class ClickGui extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphics g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         FontHelper.setFontAvailable(false);
         updateOpenAnimation();
 
@@ -447,7 +447,7 @@ public class ClickGui extends Screen {
             g.fill(0, 0, width, height, (dimAlpha << 24));
         }
 
-        float scale = (float) FIXED_GUI_SCALE / Math.max(1, mc.getWindow().getGuiScale());
+        float scale = (float) (FIXED_GUI_SCALE / Math.max(1.0, mc.getWindow().getGuiScale()));
         float mx = mouseX / scale;
         float my = mouseY / scale;
 
@@ -522,7 +522,7 @@ public class ClickGui extends Screen {
             float textX = width / 2f - 80;
             float textY = height / 2f + BG_HEIGHT / 2f + 75f;
             int textColor = Theme.withAlpha(Theme.TEXT_MUTED, hintAlpha);
-            g.text(mc.font, Component.literal("Press CTRL + ALT to reset position"),
+            g.drawString(mc.font, Component.literal("Press CTRL + ALT to reset position"),
                     (int) textX, (int) textY, textColor, false);
         }
     }
@@ -702,11 +702,15 @@ public class ClickGui extends Screen {
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return mouseClicked(new MouseButtonEvent(mouseX, mouseY, button), false);
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (closing) return false;
 
         Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, mc.getWindow().getGuiScale());
+        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
         float scale = (float) FIXED_GUI_SCALE / guiScale;
         double mx = event.x() / scale;
         double my = event.y() / scale;
@@ -813,15 +817,19 @@ public class ClickGui extends Screen {
             return true;
         }
 
-        return super.mouseClicked(event, doubleClick);
+        return super.mouseClicked(event.x(), event.y(), event.button());
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontal, double deltaY) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaY) {
+        return mouseScrolledCompat(mouseX, mouseY, 0.0, deltaY);
+    }
+
+    public boolean mouseScrolledCompat(double mouseX, double mouseY, double horizontal, double deltaY) {
         if (closing) return false;
 
         Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, mc.getWindow().getGuiScale());
+        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
         float scale = (float) FIXED_GUI_SCALE / guiScale;
         double mx = mouseX / scale;
         double my = mouseY / scale;
@@ -859,10 +867,14 @@ public class ClickGui extends Screen {
             editorPanel.mouseScrolled(mx, my, deltaY);
             return true;
         }
-        return super.mouseScrolled(mouseX, mouseY, horizontal, deltaY);
+        return super.mouseScrolled(mouseX, mouseY, deltaY);
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        return keyPressed(new KeyEvent(keyCode, scanCode, modifiers));
+    }
+
     public boolean keyPressed(KeyEvent event) {
         if (event.key() == GLFW.GLFW_KEY_ESCAPE) {
             if (background.isSearchActive()) {
@@ -895,10 +907,14 @@ public class ClickGui extends Screen {
             return true;
         }
 
-        return super.keyPressed(event);
+        return super.keyPressed(event.key(), event.scanCode(), event.modifiers());
     }
 
     @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        return charTyped(new CharacterEvent(codePoint, modifiers));
+    }
+
     public boolean charTyped(CharacterEvent event) {
         if (closing) return false;
 
@@ -918,7 +934,7 @@ public class ClickGui extends Screen {
             return true;
         }
 
-        return super.charTyped(event);
+        return super.charTyped(event.codepoint(), event.modifiers());
     }
 
     @Override
@@ -933,7 +949,7 @@ public class ClickGui extends Screen {
             startAnimation(false);
 
             Minecraft mc = Minecraft.getInstance();
-            long handle = mc.getWindow().handle();
+            long handle = mc.getWindow().getWindow();
             double centerX = mc.getWindow().getWidth() / 2.0;
             double centerY = mc.getWindow().getHeight() / 2.0;
 

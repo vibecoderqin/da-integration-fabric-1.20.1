@@ -13,9 +13,9 @@ import net.bummy1337.daintegrate.sensitives.TwitchPointsSensitiveProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -369,19 +369,19 @@ public class DonationTypeEntry implements IEntry {
             textBoxCurrency.renderButton(graphics, innerX + 176, offset, partialTicks);
             offset += rowH + 14;
         } else if (kind == TriggerKind.Subscribe) {
-            graphics.text(fontRenderer, FontHelper.comp("TYPE"), innerX, offset, Theme.TEXT_MUTED, false);
+            graphics.drawString(fontRenderer, FontHelper.comp("TYPE"), innerX, offset, Theme.TEXT_MUTED, false);
             int typeBtnOff = innerX + FontHelper.width(fontRenderer, "TYPE") + fieldGap;
             cycleLeft.drawButton(graphics, mc, typeBtnOff, centerY(offset, 10, 14), mouseX, mouseY, partialTicks);
             int typeW = FontHelper.width(fontRenderer, subscribeType);
-            graphics.text(fontRenderer, FontHelper.comp(subscribeType), typeBtnOff + 20, offset + 2, Theme.TEXT_ACCENT, false);
+            graphics.drawString(fontRenderer, FontHelper.comp(subscribeType), typeBtnOff + 20, offset + 2, Theme.TEXT_ACCENT, false);
             cycleRight.drawButton(graphics, mc, typeBtnOff + 22 + typeW + 2, centerY(offset, 10, 14), mouseX, mouseY, partialTicks);
             offset += rowH + 14;
         } else if (kind == TriggerKind.Twitch) {
-            graphics.text(fontRenderer, FontHelper.comp("TYPE"), innerX, offset, Theme.TEXT_MUTED, false);
+            graphics.drawString(fontRenderer, FontHelper.comp("TYPE"), innerX, offset, Theme.TEXT_MUTED, false);
             int typeBtnOff = innerX + FontHelper.width(fontRenderer, "TYPE") + fieldGap;
             cycleLeft.drawButton(graphics, mc, typeBtnOff, centerY(offset, 10, 14), mouseX, mouseY, partialTicks);
             int typeW = FontHelper.width(fontRenderer, twitchSubType);
-            graphics.text(fontRenderer, FontHelper.comp(twitchSubType), typeBtnOff + 20, offset + 2, Theme.TEXT_ACCENT, false);
+            graphics.drawString(fontRenderer, FontHelper.comp(twitchSubType), typeBtnOff + 20, offset + 2, Theme.TEXT_ACCENT, false);
             cycleRight.drawButton(graphics, mc, typeBtnOff + 22 + typeW + 2, centerY(offset, 10, 14), mouseX, mouseY, partialTicks);
             offset += rowH + 2;
             textBoxFrom.renderButton(graphics, innerX, offset, partialTicks);
@@ -391,7 +391,7 @@ public class DonationTypeEntry implements IEntry {
 
         // Messages section (header always visible)
         int msgLabelW = FontHelper.width(fontRenderer, "MESSAGES");
-        graphics.text(fontRenderer, FontHelper.comp("MESSAGES"), innerX, offset, Theme.TEXT_MUTED, false);
+        graphics.drawString(fontRenderer, FontHelper.comp("MESSAGES"), innerX, offset, Theme.TEXT_MUTED, false);
         addMessage.drawButton(graphics, mc, innerX + msgLabelW + 8, centerY(offset, 8, 14), mouseX, mouseY, partialTicks);
         offset += 12;
 
@@ -404,7 +404,7 @@ public class DonationTypeEntry implements IEntry {
 
         // Commands section (header always visible)
         int cmdLabelW = FontHelper.width(fontRenderer, "COMMANDS");
-        graphics.text(fontRenderer, FontHelper.comp("COMMANDS"), innerX, offset, Theme.TEXT_MUTED, false);
+        graphics.drawString(fontRenderer, FontHelper.comp("COMMANDS"), innerX, offset, Theme.TEXT_MUTED, false);
         addCommand.drawButton(graphics, mc, innerX + cmdLabelW + 8, centerY(offset, 8, 14), mouseX, mouseY, partialTicks);
         offset += 12;
 
@@ -427,18 +427,18 @@ public class DonationTypeEntry implements IEntry {
         boolean hasCommand = !commands.isEmpty() && !commands.get(0).line.getText().isEmpty();
         if (!hasMessage && !hasCommand) return y;
 
-        graphics.text(fontRenderer, FontHelper.comp("PREVIEW"), x, y, Theme.TEXT_MUTED, false);
+        graphics.drawString(fontRenderer, FontHelper.comp("PREVIEW"), x, y, Theme.TEXT_MUTED, false);
         y += 12;
 
         if (hasMessage) {
             Theme.fillPanel(graphics, x, y, width, 18);
-            graphics.text(fontRenderer, FontHelper.comp("> " + getMessagePreview()), x + 5, y + 5, Theme.TEXT_SECONDARY, false);
+            graphics.drawString(fontRenderer, FontHelper.comp("> " + getMessagePreview()), x + 5, y + 5, Theme.TEXT_SECONDARY, false);
             y += 24;
         }
 
         if (hasCommand) {
             Theme.fillPanel(graphics, x, y, width, 18);
-            graphics.text(fontRenderer, FontHelper.comp("/" + getCommandPreview()), x + 5, y + 5, Theme.TEXT_SECONDARY, false);
+            graphics.drawString(fontRenderer, FontHelper.comp("/" + getCommandPreview()), x + 5, y + 5, Theme.TEXT_SECONDARY, false);
             y += 24;
         }
 

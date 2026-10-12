@@ -5,7 +5,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public class CustomButton extends AbstractWidget {
@@ -35,21 +35,25 @@ public class CustomButton extends AbstractWidget {
     }
 
     public void drawButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
+        renderWidget(graphics, mouseX, mouseY, partialTicks);
     }
 
     public void drawButton(GuiGraphics graphics, Minecraft mc, int x, int y, int mouseX, int mouseY, float partialTicks) {
         this.setX(x);
         this.setY(y);
-        extractWidgetRenderState(graphics, mouseX, mouseY, partialTicks);
+        renderWidget(graphics, mouseX, mouseY, partialTicks);
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return mouseClicked(new MouseButtonEvent(mouseX, mouseY, button), false);
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (this.active && this.visible && event.input() == 0) {
             if (event.x() >= this.getX() && event.y() >= this.getY()
                     && event.x() < this.getX() + this.width && event.y() < this.getY() + this.height) {
-                playButtonClickSound(Minecraft.getInstance().getSoundManager());
+                playDownSound(Minecraft.getInstance().getSoundManager());
                 if (onClick != null)
                     onClick.run();
                 return true;
@@ -59,7 +63,7 @@ public class CustomButton extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderContents(graphics, mouseX, mouseY, delta);
     }
 
@@ -88,12 +92,12 @@ public class CustomButton extends AbstractWidget {
                 graphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, colorBg);
             }
             if (ShowOutline) {
-                graphics.outline(this.getX(), this.getY(), this.width, this.height, colorOutline);
+                graphics.renderOutline(this.getX(), this.getY(), this.width, this.height, colorOutline);
             }
             Component message = this.getMessage();
             String textStr = message.getString();
             int textWidth = FontHelper.width(fontrenderer, textStr);
-            graphics.text(fontrenderer, FontHelper.comp(textStr),
+            graphics.drawString(fontrenderer, FontHelper.comp(textStr),
                     this.getX() + (this.width - textWidth) / 2,
                     this.getY() + (this.height - 8) / 2,
                     colorFg, false);

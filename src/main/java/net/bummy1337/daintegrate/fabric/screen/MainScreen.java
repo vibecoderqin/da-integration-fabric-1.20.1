@@ -20,9 +20,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import java.awt.Desktop;
@@ -266,50 +266,50 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (!initialized) return;
 
         graphics.fill(0, 0, this.width, this.height, 0xB0000000);
 
         graphics.fill(winX, winY, winX + winW, winY + winH, Theme.BG_MAIN);
-        graphics.outline(winX, winY, winW, winH, Theme.BORDER_FOCUS);
+        graphics.renderOutline(winX, winY, winW, winH, Theme.BORDER_FOCUS);
 
         graphics.fill(winX, winY, winX + winW, winY + Theme.TITLE_BAR_H, Theme.BG_PANEL);
-        graphics.horizontalLine(winX, winX + winW, winY + Theme.TITLE_BAR_H, Theme.BORDER);
+        graphics.hLine(winX, winX + winW, winY + Theme.TITLE_BAR_H, Theme.BORDER);
 
-        graphics.text(fontRenderer, FontHelper.comp("DA INTEGRATE"),
+        graphics.drawString(fontRenderer, FontHelper.comp("DA INTEGRATE"),
                 winX + Theme.PADDING + 2, winY + 8, Theme.TEXT_ACCENT, false);
-        graphics.text(fontRenderer, FontHelper.comp("v" + getVersionSuffix()),
+        graphics.drawString(fontRenderer, FontHelper.comp("v" + getVersionSuffix()),
                 winX + Theme.PADDING + 2 + FontHelper.width(fontRenderer, "DA INTEGRATE") + 6,
                 winY + 8, Theme.TEXT_MUTED, false);
 
         graphics.fill(winX, winY + winH - Theme.STATUS_BAR_H, winX + winW, winY + winH, Theme.BG_PANEL);
-        graphics.horizontalLine(winX, winX + winW, winY + winH - Theme.STATUS_BAR_H, Theme.BORDER);
+        graphics.hLine(winX, winX + winW, winY + winH - Theme.STATUS_BAR_H, Theme.BORDER);
 
         int statusY = winY + winH - Theme.STATUS_BAR_H + 7;
         int statusX = winX + Theme.PADDING;
         boolean connected = client.getConnected();
         Theme.drawStatusDot(graphics, statusX, statusY - 1, connected ? Theme.GREEN : Theme.RED);
-        graphics.text(fontRenderer, FontHelper.comp(connected ? "Connected" : "Disconnected"),
+        graphics.drawString(fontRenderer, FontHelper.comp(connected ? "Connected" : "Disconnected"),
                 statusX + 12, statusY, connected ? Theme.GREEN : Theme.RED, false);
 
         int triggerCount = getTriggerCount();
         String countText = triggerCount + " trigger" + (triggerCount != 1 ? "s" : "");
-        graphics.text(fontRenderer, FontHelper.comp(countText),
+        graphics.drawString(fontRenderer, FontHelper.comp(countText),
                 statusX + 120, statusY, Theme.TEXT_MUTED, false);
 
         if (!donations.isEmpty()) {
             var last = donations.get(donations.size() - 1);
             String lastText = "Last: " + last.getUserName() + " - " + last.getAmount() + " " + last.getCurrency();
             int lastW = FontHelper.width(fontRenderer, lastText);
-            graphics.text(fontRenderer, FontHelper.comp(lastText),
+            graphics.drawString(fontRenderer, FontHelper.comp(lastText),
                     winX + winW - lastW - Theme.PADDING, statusY, Theme.TEXT_SECONDARY, false);
         }
 
         switch (activeTab) {
             case Dashboard -> {
                 if (donations.isEmpty()) {
-                    graphics.text(fontRenderer, FontHelper.comp("No events yet. Connect to start receiving!"),
+                    graphics.drawString(fontRenderer, FontHelper.comp("No events yet. Connect to start receiving!"),
                             winX + winW / 2 - FontHelper.width(fontRenderer, "No events yet. Connect to start receiving!") / 2,
                             winY + winH / 2, Theme.TEXT_MUTED, false);
                 } else {
@@ -326,20 +326,20 @@ public class MainScreen extends Screen {
                 if (saveTimer > 0) {
                     String msg = saveSuccess ? "Saved!" : "Error!";
                     int color = saveSuccess ? Theme.GREEN : Theme.RED;
-                    graphics.text(fontRenderer, FontHelper.comp(msg),
+                    graphics.drawString(fontRenderer, FontHelper.comp(msg),
                             winX + winW - FontHelper.width(fontRenderer, msg) - 90,
                             winY + 9, color, false);
                 }
             }
             case Connection -> {
                 boolean tokenExists = new java.io.File(System.getProperty("user.home"), Constants.TokenFileName).exists();
-                graphics.text(fontRenderer, FontHelper.comp(tokenExists ? "Token file exists" : "Token file not found"),
+                graphics.drawString(fontRenderer, FontHelper.comp(tokenExists ? "Token file exists" : "Token file not found"),
                         contentX(), winY + Theme.TITLE_BAR_H + Theme.TAB_BAR_H + 10,
                         tokenExists ? Theme.GREEN : Theme.YELLOW, false);
                 txtToken.renderButton(graphics);
             }
             case Settings -> {
-                graphics.text(fontRenderer, FontHelper.comp("Configuration"),
+                graphics.drawString(fontRenderer, FontHelper.comp("Configuration"),
                         contentX(), winY + Theme.TITLE_BAR_H + Theme.TAB_BAR_H + 5, Theme.TEXT_PRIMARY, false);
             }
         }
@@ -380,8 +380,12 @@ public class MainScreen extends Screen {
     }
 
     @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        return charTyped(new CharacterEvent(codePoint, modifiers));
+    }
+
     public boolean charTyped(CharacterEvent event) {
-        if (!initialized) return super.charTyped(event);
+        if (!initialized) return super.charTyped(event.codepoint(), event.modifiers());
         if (activeTab == Tab.Triggers) {
             txtSearch.charTyped(event);
             switch (activeSubTab) {
@@ -396,8 +400,12 @@ public class MainScreen extends Screen {
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        return keyPressed(new KeyEvent(keyCode, scanCode, modifiers));
+    }
+
     public boolean keyPressed(KeyEvent event) {
-        if (!initialized) return super.keyPressed(event);
+        if (!initialized) return super.keyPressed(event.key(), event.scanCode(), event.modifiers());
         if (activeTab == Tab.Triggers) {
             txtSearch.keyPressed(event);
             switch (activeSubTab) {
@@ -408,14 +416,18 @@ public class MainScreen extends Screen {
         } else if (activeTab == Tab.Connection) {
             txtToken.keyPressed(event);
         }
-        if (event.key() == 256) return super.keyPressed(event);
+        if (event.key() == 256) return super.keyPressed(event.key(), event.scanCode(), event.modifiers());
         return true;
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return mouseClicked(new MouseButtonEvent(mouseX, mouseY, button), false);
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        if (!initialized) return super.mouseClicked(event, doubleClick);
-        super.mouseClicked(event, doubleClick);
+        if (!initialized) return super.mouseClicked(event.x(), event.y(), event.button());
+        super.mouseClicked(event.x(), event.y(), event.button());
         if (activeTab == Tab.Triggers) {
             txtSearch.mouseClicked(event, doubleClick);
             switch (activeSubTab) {
@@ -430,7 +442,7 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaY) {
         if (activeTab == Tab.Dashboard) messagesPanel.mouseScrolled(mouseX, mouseY, deltaY);
         if (activeTab == Tab.Triggers) {
             switch (activeSubTab) {

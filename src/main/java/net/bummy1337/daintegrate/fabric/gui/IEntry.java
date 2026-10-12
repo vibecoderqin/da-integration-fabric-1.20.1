@@ -1,9 +1,9 @@
 package net.bummy1337.daintegrate.fabric.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 
 public interface IEntry {
     void drawEntry(GuiGraphics graphics, int x, int y, int mouseX, int mouseY, float partialTicks);

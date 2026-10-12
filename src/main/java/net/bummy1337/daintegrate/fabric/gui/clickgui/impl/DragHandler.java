@@ -30,7 +30,7 @@ public class DragHandler {
         lastUpdateTime = currentTime;
 
         if (dragging) {
-            if (GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().handle(), GLFW.GLFW_MOUSE_BUTTON_MIDDLE) != GLFW.GLFW_PRESS) {
+            if (GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_MIDDLE) != GLFW.GLFW_PRESS) {
                 dragging = false;
             } else {
                 targetOffsetX = dragStartOffsetX + (float)(mouseX - dragStartX);

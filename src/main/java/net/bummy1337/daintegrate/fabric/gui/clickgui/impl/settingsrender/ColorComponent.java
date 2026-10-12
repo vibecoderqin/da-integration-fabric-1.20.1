@@ -163,13 +163,13 @@ public class ColorComponent extends AbstractSettingComponent {
     }
 
     private boolean isControlDown() {
-        long window = Minecraft.getInstance().getWindow().handle();
+        long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_CONTROL) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_CONTROL) == GLFW.GLFW_PRESS;
     }
 
     private boolean isShiftDown() {
-        long window = Minecraft.getInstance().getWindow().handle();
+        long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT) == GLFW.GLFW_PRESS;
     }
@@ -213,7 +213,7 @@ public class ColorComponent extends AbstractSettingComponent {
     }
 
     private void pasteHexFromClipboard() {
-        String clipboardText = GLFW.glfwGetClipboardString(Minecraft.getInstance().getWindow().handle());
+        String clipboardText = GLFW.glfwGetClipboardString(Minecraft.getInstance().getWindow().getWindow());
         if (clipboardText != null && !clipboardText.isEmpty()) {
             clipboardText = clipboardText.replace("#", "").replaceAll("[^0-9A-Fa-f]", "").toUpperCase();
             if (hasHexSelection()) deleteHexSelectedText();
@@ -229,9 +229,9 @@ public class ColorComponent extends AbstractSettingComponent {
 
     private void copyHexToClipboard() {
         if (hasHexSelection()) {
-            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().handle(), "#" + getHexSelectedText());
+            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().getWindow(), "#" + getHexSelectedText());
         } else if (!hexInputText.isEmpty()) {
-            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().handle(), "#" + hexInputText);
+            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().getWindow(), "#" + hexInputText);
         }
     }
 
