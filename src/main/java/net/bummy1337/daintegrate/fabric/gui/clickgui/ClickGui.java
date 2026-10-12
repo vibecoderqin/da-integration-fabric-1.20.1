@@ -46,6 +46,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClickGui extends Screen {
+    private static final float DEFAULT_INTERFACE_SCALE = 1.0f;
+    private static final float MIN_INTERFACE_SCALE = 0.5f;
+    private static final float MAX_INTERFACE_SCALE = 1.5f;
+    private static final float INTERFACE_SCALE_STEP = 0.05f;
+    private static final String INTERFACE_SCALE_FILE = "gui-scale.txt";
+    private static float interfaceScale = loadInterfaceScale();
+
     private static ClickGui INSTANCE = new ClickGui();
     private static final int FIXED_GUI_SCALE = 2;
 
@@ -407,6 +414,57 @@ public class ClickGui extends Screen {
         return new float[]{bgX, bgY};
     }
 
+    private double toMenuX(double screenX) {
+        return width / 2.0 + (screenX - width / 2.0) / interfaceScale;
+    }
+
+    private double toMenuY(double screenY) {
+        return height / 2.0 + (screenY - height / 2.0) / interfaceScale;
+    }
+
+    private static File getInterfaceScaleFile() {
+        File configDirectory = new File(System.getProperty("user.home"), "donation-alerts-integrate");
+        return new File(configDirectory, INTERFACE_SCALE_FILE);
+    }
+
+    private static float clampInterfaceScale(float value) {
+        if (!Float.isFinite(value)) return DEFAULT_INTERFACE_SCALE;
+        return Math.max(MIN_INTERFACE_SCALE, Math.min(MAX_INTERFACE_SCALE, value));
+    }
+
+    private static float loadInterfaceScale() {
+        File file = getInterfaceScaleFile();
+        if (!file.isFile()) return DEFAULT_INTERFACE_SCALE;
+        try {
+            String value = java.nio.file.Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            return clampInterfaceScale(Float.parseFloat(value));
+        } catch (Exception ignored) {
+            return DEFAULT_INTERFACE_SCALE;
+        }
+    }
+
+    private static void saveInterfaceScale() {
+        File file = getInterfaceScaleFile();
+        File parent = file.getParentFile();
+        try {
+            if (parent != null && !parent.isDirectory() && !parent.mkdirs() && !parent.isDirectory()) {
+                throw new IOException("Could not create GUI settings directory: " + parent);
+            }
+            java.nio.file.Files.writeString(file.toPath(), Float.toString(interfaceScale), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.err.println("Could not save DonationAlerts Integration GUI scale.");
+            e.printStackTrace();
+        }
+    }
+
+    private void changeInterfaceScale(double scrollAmount) {
+        if (scrollAmount == 0.0) return;
+        float nextScale = clampInterfaceScale(interfaceScale + (scrollAmount > 0 ? INTERFACE_SCALE_STEP : -INTERFACE_SCALE_STEP));
+        if (Math.abs(nextScale - interfaceScale) < 0.001f) return;
+        interfaceScale = nextScale;
+        saveInterfaceScale();
+    }
+
     private void updateHintAnimation() {
         long currentTime = System.currentTimeMillis();
         float deltaTime = Math.min((currentTime - lastHintUpdateTime) / 1000f, 0.1f);
@@ -447,9 +505,14 @@ public class ClickGui extends Screen {
             g.fill(0, 0, width, height, (dimAlpha << 24));
         }
 
-        float scale = (float) (FIXED_GUI_SCALE / Math.max(1.0, mc.getWindow().getGuiScale()));
-        float mx = mouseX / scale;
-        float my = mouseY / scale;
+        // Scale only the menu, keeping its center anchored to the screen center.
+        g.pose().pushPose();
+        g.pose().translate(width / 2.0, height / 2.0, 0.0);
+        g.pose().scale(interfaceScale, interfaceScale, 1.0f);
+        g.pose().translate(-width / 2.0, -height / 2.0, 0.0);
+
+        float mx = (float) toMenuX(mouseX);
+        float my = (float) toMenuY(mouseY);
 
         if (!closing) {
             dragHandler.update(mx, my);
@@ -519,12 +582,15 @@ public class ClickGui extends Screen {
         float finalHintAlpha = hintAlphaAnimation * alphaMultiplier;
         if (finalHintAlpha > 0.01f) {
             int hintAlpha = (int) (255 * finalHintAlpha);
-            float textX = width / 2f - 80;
+            String hint = "Ctrl + wheel: resize  |  Ctrl + Alt: reset position";
+            float textX = width / 2f - mc.font.width(hint) / 2f;
             float textY = height / 2f + BG_HEIGHT / 2f + 75f;
             int textColor = Theme.withAlpha(Theme.TEXT_MUTED, hintAlpha);
-            g.drawString(mc.font, Component.literal("Press CTRL + ALT to reset position"),
+            g.drawString(mc.font, Component.literal(hint),
                     (int) textX, (int) textY, textColor, false);
         }
+
+        g.pose().popPose();
     }
 
     private void renderEditorPanel(GuiGraphics g, float x, float y, float width, float height,
@@ -709,11 +775,8 @@ public class ClickGui extends Screen {
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (closing) return false;
 
-        Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
-        float scale = (float) FIXED_GUI_SCALE / guiScale;
-        double mx = event.x() / scale;
-        double my = event.y() / scale;
+        double mx = toMenuX(event.x());
+        double my = toMenuY(event.y());
 
         float[] bg = calculateBackground();
         float bgX = bg[0];
@@ -828,11 +891,14 @@ public class ClickGui extends Screen {
     public boolean mouseScrolledCompat(double mouseX, double mouseY, double horizontal, double deltaY) {
         if (closing) return false;
 
-        Minecraft mc = Minecraft.getInstance();
-        int guiScale = Math.max(1, (int) mc.getWindow().getGuiScale());
-        float scale = (float) FIXED_GUI_SCALE / guiScale;
-        double mx = mouseX / scale;
-        double my = mouseY / scale;
+        // Reserve Ctrl + wheel for UI zoom instead of scrolling panels/lists.
+        if (Screen.hasControlDown()) {
+            changeInterfaceScale(deltaY);
+            return true;
+        }
+
+        double mx = toMenuX(mouseX);
+        double my = toMenuY(mouseY);
 
         float[] bg = calculateBackground();
         float bgX = bg[0];
