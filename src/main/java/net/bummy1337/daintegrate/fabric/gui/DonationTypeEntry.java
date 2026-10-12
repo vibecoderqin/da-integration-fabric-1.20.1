@@ -13,9 +13,9 @@ import net.bummy1337.daintegrate.sensitives.TwitchPointsSensitiveProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,9 +20,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.input.CharacterEvent;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import net.bummy1337.daintegrate.fabric.gui.CharacterEvent;
+import net.bummy1337.daintegrate.fabric.gui.KeyEvent;
+import net.bummy1337.daintegrate.fabric.gui.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import java.awt.Desktop;
@@ -266,7 +266,7 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (!initialized) return;
 
         graphics.fill(0, 0, this.width, this.height, 0xB0000000);
@@ -380,8 +380,12 @@ public class MainScreen extends Screen {
     }
 
     @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        return charTyped(new CharacterEvent(codePoint, modifiers));
+    }
+
     public boolean charTyped(CharacterEvent event) {
-        if (!initialized) return super.charTyped(event);
+        if (!initialized) return super.charTyped(event.codepoint(), event.modifiers());
         if (activeTab == Tab.Triggers) {
             txtSearch.charTyped(event);
             switch (activeSubTab) {
@@ -396,8 +400,12 @@ public class MainScreen extends Screen {
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        return keyPressed(new KeyEvent(keyCode, scanCode, modifiers));
+    }
+
     public boolean keyPressed(KeyEvent event) {
-        if (!initialized) return super.keyPressed(event);
+        if (!initialized) return super.keyPressed(event.key(), event.scanCode(), event.modifiers());
         if (activeTab == Tab.Triggers) {
             txtSearch.keyPressed(event);
             switch (activeSubTab) {
@@ -408,14 +416,18 @@ public class MainScreen extends Screen {
         } else if (activeTab == Tab.Connection) {
             txtToken.keyPressed(event);
         }
-        if (event.key() == 256) return super.keyPressed(event);
+        if (event.key() == 256) return super.keyPressed(event.key(), event.scanCode(), event.modifiers());
         return true;
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return mouseClicked(new MouseButtonEvent(mouseX, mouseY, button), false);
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        if (!initialized) return super.mouseClicked(event, doubleClick);
-        super.mouseClicked(event, doubleClick);
+        if (!initialized) return super.mouseClicked(event.x(), event.y(), event.button());
+        super.mouseClicked(event.x(), event.y(), event.button());
         if (activeTab == Tab.Triggers) {
             txtSearch.mouseClicked(event, doubleClick);
             switch (activeSubTab) {
@@ -430,7 +442,7 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaY) {
         if (activeTab == Tab.Dashboard) messagesPanel.mouseScrolled(mouseX, mouseY, deltaY);
         if (activeTab == Tab.Triggers) {
             switch (activeSubTab) {
