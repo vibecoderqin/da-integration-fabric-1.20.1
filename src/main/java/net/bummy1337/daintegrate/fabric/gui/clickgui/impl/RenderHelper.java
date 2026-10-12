@@ -40,11 +40,11 @@ public class RenderHelper {
     }
 
     public static void outline(GuiGraphics g, float x, float y, float w, float h, float stroke, int color) {
-        g.outline((int) x, (int) y, (int) w, (int) h, color);
+        g.renderOutline((int) x, (int) y, (int) w, (int) h, color);
     }
 
     public static void roundedOutline(GuiGraphics g, float x, float y, float w, float h, float radius, int color) {
-        g.outline((int) x, (int) y, (int) w, (int) h, color);
+        g.renderOutline((int) x, (int) y, (int) w, (int) h, color);
     }
 
     public static void gradientRect(GuiGraphics g, float x, float y, float w, float h, int[] colors) {
@@ -57,13 +57,13 @@ public class RenderHelper {
 
     public static void text(GuiGraphics g, String text, float x, float y, float size, int color) {
         if (font == null) return;
-        g.text(font, FontHelper.comp(text), (int) x, (int) y, color, false);
+        g.drawString(font, FontHelper.comp(text), (int) x, (int) y, color, false);
     }
 
     public static void textCentered(GuiGraphics g, String text, float centerX, float y, float size, int color) {
         if (font == null) return;
         int w = FontHelper.width(font, text);
-        g.text(font, FontHelper.comp(text), (int) (centerX - w / 2f), (int) y, color, false);
+        g.drawString(font, FontHelper.comp(text), (int) (centerX - w / 2f), (int) y, color, false);
     }
 
     public static float textWidth(String text, float size) {

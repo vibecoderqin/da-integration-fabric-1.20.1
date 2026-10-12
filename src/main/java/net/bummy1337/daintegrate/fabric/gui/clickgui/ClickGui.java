@@ -522,7 +522,7 @@ public class ClickGui extends Screen {
             float textX = width / 2f - 80;
             float textY = height / 2f + BG_HEIGHT / 2f + 75f;
             int textColor = Theme.withAlpha(Theme.TEXT_MUTED, hintAlpha);
-            g.text(mc.font, Component.literal("Press CTRL + ALT to reset position"),
+            g.drawString(mc.font, Component.literal("Press CTRL + ALT to reset position"),
                     (int) textX, (int) textY, textColor, false);
         }
     }

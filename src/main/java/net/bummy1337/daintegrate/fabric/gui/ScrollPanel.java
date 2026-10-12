@@ -126,7 +126,7 @@ public class ScrollPanel<T extends IEntry> extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
     }
 
     @Override

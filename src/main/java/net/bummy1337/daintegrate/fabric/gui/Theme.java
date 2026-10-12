@@ -41,7 +41,7 @@ public class Theme {
     public static final int SCROLLBAR_WIDTH = 5;
 
     public static void drawSeparator(GuiGraphics g, int x, int y, int w) {
-        g.horizontalLine(x, x + w, y, DIVIDER);
+        g.hLine(x, x + w, y, DIVIDER);
     }
 
     public static void drawLeftAccentBar(GuiGraphics g, int x, int y, int h, int color) {
@@ -80,21 +80,21 @@ public class Theme {
     public static void fillCard(GuiGraphics g, int x, int y, int w, int h, boolean hovered) {
         int bg = hovered ? BG_ENTRY_HOVER : BG_ENTRY;
         fillRounded(g, x, y, w, h, 6, bg);
-        g.outline(x, y, w, h, hovered ? BORDER_HOVER : BORDER);
+        g.renderOutline(x, y, w, h, hovered ? BORDER_HOVER : BORDER);
     }
 
     public static void fillPanel(GuiGraphics g, int x, int y, int w, int h) {
         fillRounded(g, x, y, w, h, 6, BG_PANEL);
-        g.outline(x, y, w, h, BORDER);
+        g.renderOutline(x, y, w, h, BORDER);
     }
 
     public static void fillPanelGradient(GuiGraphics g, int x, int y, int w, int h) {
         g.fillGradient(x, y, x + w, y + h, BG_PANEL, BG_MAIN);
-        g.outline(x, y, w, h, BORDER);
+        g.renderOutline(x, y, w, h, BORDER);
     }
 
     public static void fillInput(GuiGraphics g, int x, int y, int w, int h, boolean focused) {
         fillRounded(g, x, y, w, h, 4, focused ? BG_INPUT_FOCUS : BG_INPUT);
-        g.outline(x, y, w, h, focused ? BORDER_FOCUS : BORDER);
+        g.renderOutline(x, y, w, h, focused ? BORDER_FOCUS : BORDER);
     }
 }
