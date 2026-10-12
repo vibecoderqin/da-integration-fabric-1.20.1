@@ -104,7 +104,7 @@ public class TextComponent extends AbstractSettingComponent {
         int outlineColor = focused
                 ? Theme.withAlpha(Theme.BORDER_FOCUS, (int)(outlineAlpha * alphaMultiplier))
                 : Theme.withAlpha(Theme.BORDER, (int)(outlineAlpha * alphaMultiplier));
-        RenderHelper.outline(g, boxX, boxY, INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT, 0.5f, outlineColor);
+        RenderHelper.renderOutline(g, boxX, boxY, INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT, 0.5f, outlineColor);
 
         renderTextContent(g, font, boxX, boxY, deltaTime);
     }
