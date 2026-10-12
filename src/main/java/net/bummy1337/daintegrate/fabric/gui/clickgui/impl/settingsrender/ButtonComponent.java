@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.settingsrender;
 
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class ButtonComponent extends AbstractSettingComponent {
     private final String settingName;
@@ -54,7 +54,7 @@ public class ButtonComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         float deltaTime = getDeltaTime();
 
         boolean hovered = isButtonHover(mouseX, mouseY);
@@ -89,7 +89,7 @@ public class ButtonComponent extends AbstractSettingComponent {
         renderButton(g, mouseX, mouseY);
     }
 
-    private void renderButton(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+    private void renderButton(GuiGraphics g, int mouseX, int mouseY) {
         float buttonX = x + width - BUTTON_WIDTH - 2;
         float buttonY = y + height / 2 - BUTTON_HEIGHT / 2;
 
@@ -130,7 +130,7 @@ public class ButtonComponent extends AbstractSettingComponent {
         renderButtonContent(g, scaledX, scaledY, scaledWidth, scaledHeight);
     }
 
-    private void renderButtonContent(GuiGraphicsExtractor g, float buttonX, float buttonY,
+    private void renderButtonContent(GuiGraphics g, float buttonX, float buttonY,
                                      float buttonWidth, float buttonHeight) {
         var font = net.minecraft.client.Minecraft.getInstance().font;
         String text = buttonName != null ? buttonName : "Run";

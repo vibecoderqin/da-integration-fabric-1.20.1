@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.settingsrender;
 
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class CheckboxComponent extends AbstractSettingComponent {
     private final String settingName;
@@ -27,7 +27,7 @@ public class CheckboxComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         boolean hovered = isHover(mouseX, mouseY);
 
         float hoverTarget = hovered ? 1f : 0f;

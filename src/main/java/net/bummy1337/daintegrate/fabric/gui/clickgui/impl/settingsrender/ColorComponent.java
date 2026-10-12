@@ -4,7 +4,7 @@ import net.bummy1337.daintegrate.fabric.gui.FontHelper;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
@@ -256,7 +256,7 @@ public class ColorComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         float deltaTime = getDeltaTime();
         var font = Minecraft.getInstance().font;
 
@@ -304,7 +304,7 @@ public class ColorComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderColorPreview(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+    private void renderColorPreview(GuiGraphics g, int mouseX, int mouseY) {
         float previewX = x + width - 14;
         float previewY = y + height / 2 / 2;
 
@@ -320,7 +320,7 @@ public class ColorComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BORDER, outlineAlpha));
     }
 
-    private void renderColorPicker(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderColorPicker(GuiGraphics g, net.minecraft.client.gui.Font font,
                                    int mouseX, int mouseY, float deltaTime) {
         float pickerX = x;
         float pickerY = y + height + SPACING;
@@ -354,7 +354,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.disableScissor(g);
     }
 
-    private void renderSaturationBrightnessPalette(GuiGraphicsExtractor g, float paletteX, float paletteY,
+    private void renderSaturationBrightnessPalette(GuiGraphics g, float paletteX, float paletteY,
                                                    float paletteWidth, float paletteHeight, int mouseX, int mouseY) {
         int pureColor = Color.HSBtoRGB(displayHue, 1f, 1f);
         Color pure = new Color(pureColor);
@@ -388,7 +388,7 @@ public class ColorComponent extends AbstractSettingComponent {
                 applyContentAlpha(new Color(currentColor)));
     }
 
-    private void renderHueSlider(GuiGraphicsExtractor g, float sliderX, float sliderY,
+    private void renderHueSlider(GuiGraphics g, float sliderX, float sliderY,
                                  float sliderWidth, float sliderHeight, int mouseX, int mouseY) {
         int[] hueColors = {
                 Color.HSBtoRGB(0f, 1f, 1f),
@@ -445,7 +445,7 @@ public class ColorComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BLACK, handleShadowAlpha));
     }
 
-    private void renderAlphaSlider(GuiGraphicsExtractor g, float sliderX, float sliderY,
+    private void renderAlphaSlider(GuiGraphics g, float sliderX, float sliderY,
                                    float sliderWidth, float sliderHeight, int mouseX, int mouseY) {
         int checkAlpha = clamp((int)(150 * expandAnimation * contentAlpha * alphaMultiplier));
         RenderHelper.rect(g, sliderX, sliderY, sliderWidth, sliderHeight,
@@ -479,7 +479,7 @@ public class ColorComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BLACK, handleShadowAlpha));
     }
 
-    private void renderHexInput(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderHexInput(GuiGraphics g, net.minecraft.client.gui.Font font,
                                 float inputX, float inputY, float inputWidth, float inputHeight,
                                 int mouseX, int mouseY) {
         boolean inputHovered = mouseX >= inputX && mouseX <= inputX + inputWidth &&

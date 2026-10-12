@@ -3,7 +3,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.settingsrender;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.glfw.GLFW;
 
 public class BindComponent extends AbstractSettingComponent {
@@ -68,7 +68,7 @@ public class BindComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         float deltaTime = getDeltaTime();
 
         boolean hovered = isHover(mouseX, mouseY);
@@ -113,7 +113,7 @@ public class BindComponent extends AbstractSettingComponent {
         renderBindBox(g, mouseX, mouseY);
     }
 
-    private void renderBindBox(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+    private void renderBindBox(GuiGraphics g, int mouseX, int mouseY) {
         float bindBoxX = x + width - BIND_BOX_WIDTH - 2;
         float bindBoxY = y + height / 2 - BIND_BOX_HEIGHT / 2;
 
@@ -154,7 +154,7 @@ public class BindComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderBindText(GuiGraphicsExtractor g, float boxX, float boxY, float boxWidth, float boxHeight) {
+    private void renderBindText(GuiGraphics g, float boxX, float boxY, float boxWidth, float boxHeight) {
         var font = Minecraft.getInstance().font;
         float textY = boxY + boxHeight / 2 - 2.5f;
         float centerX = boxX + boxWidth / 2;
@@ -191,7 +191,7 @@ public class BindComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderListeningIndicator(GuiGraphicsExtractor g, float boxX, float boxY,
+    private void renderListeningIndicator(GuiGraphics g, float boxX, float boxY,
                                           float boxWidth, float boxHeight) {
         float dotSpacing = 3f;
         float dotSize = 1.5f;

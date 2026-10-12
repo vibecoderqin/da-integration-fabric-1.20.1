@@ -1,6 +1,6 @@
 package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.settingsrender;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class AbstractSettingComponent {
     protected float x, y, width, height;
@@ -20,7 +20,7 @@ public abstract class AbstractSettingComponent {
     public String getName() { return name; }
     public String getDescription() { return description; }
 
-    public abstract void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta);
+    public abstract void render(GuiGraphics g, int mouseX, int mouseY, float delta);
     public abstract boolean mouseClicked(double mouseX, double mouseY, int button);
     public boolean mouseReleased(double mouseX, double mouseY, int button) { return false; }
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) { return false; }

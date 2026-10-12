@@ -4,7 +4,7 @@ import net.bummy1337.daintegrate.fabric.gui.FontHelper;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,7 +196,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         float deltaTime = getDeltaTime();
         var font = Minecraft.getInstance().font;
 
@@ -239,7 +239,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderArrowIcon(GuiGraphicsExtractor g, float iconX, float iconY) {
+    private void renderArrowIcon(GuiGraphics g, float iconX, float iconY) {
         int arrowAlpha = 120 + (int)(hoverAnimation * 60);
 
         float centerX = iconX + 4f;
@@ -262,7 +262,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
         RenderHelper.rect(g, rotatedX + 1f, rotatedY + 2f, triSize - 2f, 1f, triColor);
     }
 
-    private void renderScrollingDescription(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderScrollingDescription(GuiGraphics g, net.minecraft.client.gui.Font font,
                                             String description, float deltaTime) {
         float descY = y + height / 2 + 0.5f;
         float boxX = x + width - BOX_WIDTH - 2;
@@ -321,7 +321,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderSelectedText(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderSelectedText(GuiGraphics g, net.minecraft.client.gui.Font font,
                                     float boxX, float boxY, float boxWidth, float boxHeight, float deltaTime) {
         float textY = boxY + boxHeight / 2 - 2.5f;
         float availableWidth = boxWidth - 4;
@@ -427,7 +427,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderExpandedOptions(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderExpandedOptions(GuiGraphics g, net.minecraft.client.gui.Font font,
                                        int mouseX, int mouseY, float boxX, float startY, float deltaTime) {
         float fullPanelHeight = options.size() * OPTION_HEIGHT;
         float visibleHeight = fullPanelHeight * expandAnimation;
