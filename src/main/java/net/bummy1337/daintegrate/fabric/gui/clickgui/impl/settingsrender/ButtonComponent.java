@@ -125,7 +125,7 @@ public class ButtonComponent extends AbstractSettingComponent {
         int outlineAlpha = clamp((int)((60 + hoverAnimation * 60 + pressAnimation * 40) * alphaMultiplier));
         int outlineGray = clamp((int)(80 + hoverAnimation * 40 + pressAnimation * 30));
         int outlineColor = Theme.withAlpha(0xFF000000 | (outlineGray << 16) | (outlineGray << 8) | outlineGray, outlineAlpha);
-        RenderHelper.outline(g, scaledX, scaledY, scaledWidth, scaledHeight, 0.5f, outlineColor);
+        RenderHelper.renderOutline(g, scaledX, scaledY, scaledWidth, scaledHeight, 0.5f, outlineColor);
 
         renderButtonContent(g, scaledX, scaledY, scaledWidth, scaledHeight);
     }

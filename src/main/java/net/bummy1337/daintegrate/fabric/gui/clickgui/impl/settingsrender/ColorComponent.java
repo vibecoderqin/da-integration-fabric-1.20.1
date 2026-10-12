@@ -316,7 +316,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.rect(g, scaledX + 0.5f, scaledY + 0.5f, 9, 9,
                 applyContentAlpha(new Color(colorValue, true)));
         int outlineAlpha = clamp((int)((255 + previewHoverAnimation * 60) * alphaMultiplier));
-        RenderHelper.outline(g, scaledX, scaledY, 10, 10, 1f,
+        RenderHelper.renderOutline(g, scaledX, scaledY, 10, 10, 1f,
                 Theme.withAlpha(Theme.BORDER, outlineAlpha));
     }
 
@@ -330,7 +330,7 @@ public class ColorComponent extends AbstractSettingComponent {
         float visibleHeight = totalExpandedHeight * expandAnimation;
 
         int outlineAlpha = clamp((int)(60 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, pickerX, pickerY, pickerWidth, visibleHeight + 2, 0.5f,
+        RenderHelper.renderOutline(g, pickerX, pickerY, pickerWidth, visibleHeight + 2, 0.5f,
                 Theme.withAlpha(Theme.BORDER, outlineAlpha));
 
         if (expandAnimation < 0.3f || contentAlpha < 0.01f) return;
@@ -430,7 +430,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.gradientRect(g, sliderX, sliderY + 5 * segmentHeight - 0.5f, sliderWidth, segmentHeight, colorsBottom);
 
         int hueOutlineAlpha = clamp((int)(80 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, sliderX, sliderY, sliderWidth, sliderHeight, 0.5f,
+        RenderHelper.renderOutline(g, sliderX, sliderY, sliderWidth, sliderHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, hueOutlineAlpha));
 
         float handleY = sliderY + displayHue * sliderHeight;
@@ -441,7 +441,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.rect(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight,
                 Theme.withAlpha(Theme.WHITE, handleAlpha));
         int handleShadowAlpha = clamp((int)(100 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight, 0.5f,
+        RenderHelper.renderOutline(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight, 0.5f,
                 Theme.withAlpha(Theme.BLACK, handleShadowAlpha));
     }
 
@@ -464,7 +464,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.gradientRect(g, sliderX, sliderY, sliderWidth, sliderHeight, alphaGradient);
 
         int alphaOutlineAlpha = clamp((int)(80 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, sliderX, sliderY, sliderWidth, sliderHeight, 0.5f,
+        RenderHelper.renderOutline(g, sliderX, sliderY, sliderWidth, sliderHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, alphaOutlineAlpha));
 
         float handleY = sliderY + displayAlpha * sliderHeight;
@@ -475,7 +475,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.rect(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight,
                 Theme.withAlpha(Theme.WHITE, handleAlpha));
         int handleShadowAlpha = clamp((int)(100 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight, 0.5f,
+        RenderHelper.renderOutline(g, sliderX - 1, handleY - handleHeight / 2, handleWidth, handleHeight, 0.5f,
                 Theme.withAlpha(Theme.BLACK, handleShadowAlpha));
     }
 
@@ -491,7 +491,7 @@ public class ColorComponent extends AbstractSettingComponent {
 
         int hexOutlineAlpha = clamp((int)((60 + hexInputAnimation * 80 + (inputHovered ? 20 : 0)) * expandAnimation * contentAlpha * alphaMultiplier));
         int outlineColor = hexInputActive ? Theme.BORDER_FOCUS : Theme.BORDER;
-        RenderHelper.outline(g, inputX, inputY, inputWidth, inputHeight, 0.5f,
+        RenderHelper.renderOutline(g, inputX, inputY, inputWidth, inputHeight, 0.5f,
                 Theme.withAlpha(outlineColor, hexOutlineAlpha));
 
         String label = "HEX: ";
@@ -530,7 +530,7 @@ public class ColorComponent extends AbstractSettingComponent {
         RenderHelper.rect(g, miniPreviewX, miniPreviewY, miniPreviewSize, miniPreviewSize,
                 applyContentAlpha(new Color(getDisplayColor(), true)));
         int miniOutlineAlpha = clamp((int)(80 * expandAnimation * contentAlpha * alphaMultiplier));
-        RenderHelper.outline(g, miniPreviewX, miniPreviewY, miniPreviewSize, miniPreviewSize, 0.5f,
+        RenderHelper.renderOutline(g, miniPreviewX, miniPreviewY, miniPreviewSize, miniPreviewSize, 0.5f,
                 Theme.withAlpha(Theme.BORDER, miniOutlineAlpha));
     }
 

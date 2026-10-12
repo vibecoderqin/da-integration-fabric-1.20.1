@@ -227,7 +227,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BG_INPUT, (int)(bgAlpha * alphaMultiplier)));
 
         int outlineAlpha = 60 + (int)(hoverAnimation * 40);
-        RenderHelper.outline(g, boxX, boxY, BOX_WIDTH, boxHeight, 0.5f,
+        RenderHelper.renderOutline(g, boxX, boxY, BOX_WIDTH, boxHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, (int)(outlineAlpha * alphaMultiplier)));
 
         renderSelectedText(g, font, boxX, boxY, BOX_WIDTH, boxHeight, deltaTime);
@@ -439,7 +439,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
                 Theme.withAlpha(Theme.BG_PANEL, panelBgAlpha));
 
         int panelOutlineAlpha = (int)(100 * panelAlpha);
-        RenderHelper.outline(g, boxX, startY, BOX_WIDTH, visibleHeight, 0.5f,
+        RenderHelper.renderOutline(g, boxX, startY, BOX_WIDTH, visibleHeight, 0.5f,
                 Theme.withAlpha(Theme.BORDER, panelOutlineAlpha));
 
         if (visibleHeight < 1f) return;
@@ -480,7 +480,7 @@ public class MultiSelectComponent extends AbstractSettingComponent {
                     Theme.withAlpha(Theme.BG_INPUT, checkBgAlpha));
 
             int checkOutlineAlpha = (int)((80 + hoverAnim * 40) * panelAlpha);
-            RenderHelper.outline(g, checkX, checkY, checkSize, checkSize, 0.5f,
+            RenderHelper.renderOutline(g, checkX, checkY, checkSize, checkSize, 0.5f,
                     Theme.withAlpha(Theme.BORDER, checkOutlineAlpha));
 
             if (checkAnim > 0.01f) {
