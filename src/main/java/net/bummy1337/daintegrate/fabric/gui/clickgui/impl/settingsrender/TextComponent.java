@@ -104,7 +104,7 @@ public class TextComponent extends AbstractSettingComponent {
         int outlineColor = focused
                 ? Theme.withAlpha(Theme.BORDER_FOCUS, (int)(outlineAlpha * alphaMultiplier))
                 : Theme.withAlpha(Theme.BORDER, (int)(outlineAlpha * alphaMultiplier));
-        RenderHelper.renderOutline(g, boxX, boxY, INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT, 0.5f, outlineColor);
+        RenderHelper.outline(g, boxX, boxY, INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT, 0.5f, outlineColor);
 
         renderTextContent(g, font, boxX, boxY, deltaTime);
     }
@@ -223,13 +223,13 @@ public class TextComponent extends AbstractSettingComponent {
     }
 
     private boolean isControlDown() {
-        long window = Minecraft.getInstance().getWindow().handle();
+        long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_CONTROL) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_CONTROL) == GLFW.GLFW_PRESS;
     }
 
     private boolean isShiftDown() {
-        long window = Minecraft.getInstance().getWindow().handle();
+        long window = Minecraft.getInstance().getWindow().getWindow();
         return GLFW.glfwGetKey(window, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS ||
                 GLFW.glfwGetKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT) == GLFW.GLFW_PRESS;
     }
@@ -390,7 +390,7 @@ public class TextComponent extends AbstractSettingComponent {
     }
 
     private void pasteFromClipboard() {
-        String clipboardText = GLFW.glfwGetClipboardString(Minecraft.getInstance().getWindow().handle());
+        String clipboardText = GLFW.glfwGetClipboardString(Minecraft.getInstance().getWindow().getWindow());
         if (clipboardText != null && !clipboardText.isEmpty()) {
             clipboardText = clipboardText.replaceAll("[\n\r\t]", "");
 
@@ -413,7 +413,7 @@ public class TextComponent extends AbstractSettingComponent {
 
     private void copyToClipboard() {
         if (hasSelection()) {
-            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().handle(), getSelectedText());
+            GLFW.glfwSetClipboardString(Minecraft.getInstance().getWindow().getWindow(), getSelectedText());
         }
     }
 

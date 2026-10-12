@@ -145,7 +145,7 @@ public class BindComponent extends AbstractSettingComponent {
             outlineColor = Theme.withAlpha(Theme.BORDER, (int)((60 + bindHoverAnimation * 40) * alphaMultiplier));
         }
 
-        RenderHelper.renderOutline(g, scaledX, scaledY, scaledWidth, scaledHeight, 0.5f, outlineColor);
+        RenderHelper.outline(g, scaledX, scaledY, scaledWidth, scaledHeight, 0.5f, outlineColor);
 
         renderBindText(g, scaledX, scaledY, scaledWidth, scaledHeight);
 
