@@ -959,7 +959,7 @@ public class ClickGui extends Screen {
             }
         }
 
-        if (!editorPanel.getEntries().isEmpty() && editorPanel.keyPressed(event)) {
+        if (isTriggerSection() && !editorPanel.getEntries().isEmpty() && editorPanel.keyPressed(event)) {
             return true;
         }
 
@@ -990,7 +990,7 @@ public class ClickGui extends Screen {
             }
         }
 
-        if (!editorPanel.getEntries().isEmpty()) {
+        if (isTriggerSection() && !editorPanel.getEntries().isEmpty()) {
             editorPanel.charTyped(event);
             return true;
         }
