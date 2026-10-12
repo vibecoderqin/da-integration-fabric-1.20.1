@@ -96,7 +96,7 @@ public class ClientEntryPoint implements ClientModInitializer {
 "key.categories.daintegrate"
                 )
         );
-        openClickGuiKey = KeyMappingHelper.registerKeyMapping(
+        openClickGuiKey = KeyBindingHelper.registerKeyBinding(
                 new KeyMapping(
                         "key.daintegrate.clickgui",
                         InputConstants.Type.KEYSYM,

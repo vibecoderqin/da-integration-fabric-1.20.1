@@ -44,6 +44,11 @@ public class CustomButton extends AbstractWidget {
         renderWidget(graphics, mouseX, mouseY, partialTicks);
     }
 
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return mouseClicked(new MouseButtonEvent(mouseX, mouseY, button), false);
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (this.active && this.visible && event.input() == 0) {
             if (event.x() >= this.getX() && event.y() >= this.getY()
