@@ -4,7 +4,7 @@ import net.bummy1337.daintegrate.fabric.gui.FontHelper;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.glfw.GLFW;
 
 public class SliderComponent extends AbstractSettingComponent {
@@ -55,7 +55,7 @@ public class SliderComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         if (dragging) {
             updateValue(mouseX);
         }
@@ -112,7 +112,7 @@ public class SliderComponent extends AbstractSettingComponent {
         backgroundAlpha = lerp(backgroundAlpha, bgTarget, deltaTime * ANIMATION_SPEED);
     }
 
-    private void renderValueInput(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderValueInput(GuiGraphics g, net.minecraft.client.gui.Font font,
                                   int mouseX, int mouseY) {
         float currentValue = getter.get();
         String valueText = isInteger
@@ -184,7 +184,7 @@ public class SliderComponent extends AbstractSettingComponent {
         }
     }
 
-    private void renderSlider(GuiGraphicsExtractor g) {
+    private void renderSlider(GuiGraphics g) {
         float sliderY = y + 11;
         float sliderHeight = 2.5f;
         float sliderPadding = 1f;

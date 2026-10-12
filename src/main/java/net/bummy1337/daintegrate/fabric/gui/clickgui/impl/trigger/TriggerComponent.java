@@ -6,7 +6,7 @@ import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.handler.Trigge
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.render.SettingsPanelRenderer;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.render.TriggerListRenderer;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.trigger.util.TriggerDisplayHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.*;
 
@@ -82,7 +82,7 @@ public class TriggerComponent {
         scrollHandler.resetSettingScroll();
     }
 
-    public void renderTriggerList(GuiGraphicsExtractor g, float x, float y, float width, float height,
+    public void renderTriggerList(GuiGraphics g, float x, float y, float width, float height,
                                   float mouseX, float mouseY, int guiScale, float alphaMultiplier) {
         lastMouseX = mouseX;
         lastMouseY = mouseY;
@@ -97,7 +97,7 @@ public class TriggerComponent {
                 mouseX, mouseY, guiScale, alphaMultiplier, animationHandler, scrollHandler);
     }
 
-    public void renderSettingsPanel(GuiGraphicsExtractor g, float x, float y, float width, float height,
+    public void renderSettingsPanel(GuiGraphics g, float x, float y, float width, float height,
                                     float mouseX, float mouseY, float delta, int guiScale, float alphaMultiplier) {
         savedGuiScale = guiScale;
         settingsRenderer.render(g, selectedTrigger, x, y, width, height,

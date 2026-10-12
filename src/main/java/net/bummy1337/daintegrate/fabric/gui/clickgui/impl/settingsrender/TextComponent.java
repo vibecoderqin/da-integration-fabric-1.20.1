@@ -4,7 +4,7 @@ import net.bummy1337.daintegrate.fabric.gui.FontHelper;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.glfw.GLFW;
 
 public class TextComponent extends AbstractSettingComponent {
@@ -69,7 +69,7 @@ public class TextComponent extends AbstractSettingComponent {
     }
 
     @Override
-    public void render(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics g, int mouseX, int mouseY, float delta) {
         float deltaTime = getDeltaTime();
         var font = Minecraft.getInstance().font;
 
@@ -109,7 +109,7 @@ public class TextComponent extends AbstractSettingComponent {
         renderTextContent(g, font, boxX, boxY, deltaTime);
     }
 
-    private void renderTextContent(GuiGraphicsExtractor g, net.minecraft.client.gui.Font font,
+    private void renderTextContent(GuiGraphics g, net.minecraft.client.gui.Font font,
                                    float boxX, float boxY, float deltaTime) {
         float textAreaX = boxX + TEXT_PADDING;
         float textAreaWidth = INPUT_BOX_WIDTH - TEXT_PADDING * 2;
