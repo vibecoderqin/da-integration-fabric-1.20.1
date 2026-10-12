@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl;
 
 import net.bummy1337.daintegrate.fabric.gui.FontHelper;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class RenderHelper {
     private static Font font;
@@ -15,11 +15,11 @@ public class RenderHelper {
         return font;
     }
 
-    public static void rect(GuiGraphicsExtractor g, float x, float y, float w, float h, int color) {
+    public static void rect(GuiGraphics g, float x, float y, float w, float h, int color) {
         g.fill((int) x, (int) y, (int) (x + w), (int) (y + h), color);
     }
 
-    public static void roundedRect(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int color) {
+    public static void roundedRect(GuiGraphics g, float x, float y, float w, float h, float radius, int color) {
         int r = Math.max(0, Math.min((int) radius, (int) Math.min(w, h) / 2));
         if (r <= 1) {
             rect(g, x, y, w, h, color);
@@ -39,15 +39,15 @@ public class RenderHelper {
         }
     }
 
-    public static void outline(GuiGraphicsExtractor g, float x, float y, float w, float h, float stroke, int color) {
+    public static void outline(GuiGraphics g, float x, float y, float w, float h, float stroke, int color) {
         g.outline((int) x, (int) y, (int) w, (int) h, color);
     }
 
-    public static void roundedOutline(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int color) {
+    public static void roundedOutline(GuiGraphics g, float x, float y, float w, float h, float radius, int color) {
         g.outline((int) x, (int) y, (int) w, (int) h, color);
     }
 
-    public static void gradientRect(GuiGraphicsExtractor g, float x, float y, float w, float h, int[] colors) {
+    public static void gradientRect(GuiGraphics g, float x, float y, float w, float h, int[] colors) {
         int tl = colors.length > 0 ? colors[0] : 0;
         int tr = colors.length > 1 ? colors[1] : tl;
         int bl = colors.length > 2 ? colors[2] : tl;
@@ -55,12 +55,12 @@ public class RenderHelper {
         g.fillGradient((int) x, (int) y, (int) (x + w), (int) (y + h), tl, br);
     }
 
-    public static void text(GuiGraphicsExtractor g, String text, float x, float y, float size, int color) {
+    public static void text(GuiGraphics g, String text, float x, float y, float size, int color) {
         if (font == null) return;
         g.text(font, FontHelper.comp(text), (int) x, (int) y, color, false);
     }
 
-    public static void textCentered(GuiGraphicsExtractor g, String text, float centerX, float y, float size, int color) {
+    public static void textCentered(GuiGraphics g, String text, float centerX, float y, float size, int color) {
         if (font == null) return;
         int w = FontHelper.width(font, text);
         g.text(font, FontHelper.comp(text), (int) (centerX - w / 2f), (int) y, color, false);
@@ -71,11 +71,11 @@ public class RenderHelper {
         return FontHelper.width(font, text);
     }
 
-    public static void enableScissor(GuiGraphicsExtractor g, float x, float y, float w, float h) {
+    public static void enableScissor(GuiGraphics g, float x, float y, float w, float h) {
         g.enableScissor((int) x, (int) y, (int) (x + w), (int) (y + h));
     }
 
-    public static void disableScissor(GuiGraphicsExtractor g) {
+    public static void disableScissor(GuiGraphics g) {
         g.disableScissor();
     }
 }

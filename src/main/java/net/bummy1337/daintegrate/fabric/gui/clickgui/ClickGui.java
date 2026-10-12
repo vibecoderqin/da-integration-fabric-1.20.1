@@ -24,7 +24,7 @@ import net.bummy1337.daintegrate.sensitives.SubscribeSensitiveProperties;
 import net.bummy1337.daintegrate.sensitives.TwitchBitsSensitiveProperties;
 import net.bummy1337.daintegrate.sensitives.TwitchPointsSensitiveProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
@@ -428,7 +428,7 @@ public class ClickGui extends Screen {
     }
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphics g, int mouseX, int mouseY, float delta) {
         FontHelper.setFontAvailable(false);
         updateOpenAnimation();
 
@@ -527,7 +527,7 @@ public class ClickGui extends Screen {
         }
     }
 
-    private void renderEditorPanel(GuiGraphicsExtractor g, float x, float y, float width, float height,
+    private void renderEditorPanel(GuiGraphics g, float x, float y, float width, float height,
                                    float mouseX, float mouseY, float delta, float alphaMultiplier) {
         RenderHelper.roundedRect(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BG_PANEL, (int) (64 * alphaMultiplier)));
         RenderHelper.roundedOutline(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BORDER, (int) (190 * alphaMultiplier)));
@@ -560,7 +560,7 @@ public class ClickGui extends Screen {
         editorPanel.drawPanel(g, (int) mouseX, (int) mouseY, delta);
     }
 
-    private void renderActionButton(GuiGraphicsExtractor g, float x, float y, float width, float height,
+    private void renderActionButton(GuiGraphics g, float x, float y, float width, float height,
                                     String label, boolean hovered, float alphaMultiplier) {
         int bg = hovered ? Theme.BG_ENTRY_HOVER : Theme.BG_ENTRY;
         int border = hovered ? Theme.BORDER_FOCUS : Theme.BORDER;
@@ -575,7 +575,7 @@ public class ClickGui extends Screen {
         return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
     }
 
-    private void renderDashboardPanel(GuiGraphicsExtractor g, float x, float y, float width, float height, float alphaMultiplier) {
+    private void renderDashboardPanel(GuiGraphics g, float x, float y, float width, float height, float alphaMultiplier) {
         RenderHelper.roundedRect(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BG_PANEL, (int) (80 * alphaMultiplier)));
         RenderHelper.roundedOutline(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BORDER, (int) (190 * alphaMultiplier)));
 
@@ -611,7 +611,7 @@ public class ClickGui extends Screen {
         }
     }
 
-    private void renderConnectionPanel(GuiGraphicsExtractor g, float x, float y, float width, float height,
+    private void renderConnectionPanel(GuiGraphics g, float x, float y, float width, float height,
                                        float mouseX, float mouseY, float delta, float alphaMultiplier) {
         RenderHelper.roundedRect(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BG_PANEL, (int) (80 * alphaMultiplier)));
         RenderHelper.roundedOutline(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BORDER, (int) (190 * alphaMultiplier)));
@@ -632,7 +632,7 @@ public class ClickGui extends Screen {
         }
     }
 
-    private void renderHelpPanel(GuiGraphicsExtractor g, float x, float y, float width, float height, float alphaMultiplier) {
+    private void renderHelpPanel(GuiGraphics g, float x, float y, float width, float height, float alphaMultiplier) {
         RenderHelper.roundedRect(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BG_PANEL, (int) (80 * alphaMultiplier)));
         RenderHelper.roundedOutline(g, x, y, width, height, 8f, Theme.withAlpha(Theme.BORDER, (int) (190 * alphaMultiplier)));
 

@@ -1,6 +1,6 @@
 package net.bummy1337.daintegrate.fabric.gui;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class Theme {
     public static final int
@@ -40,15 +40,15 @@ public class Theme {
     public static final int CARD_RADIUS = 0;
     public static final int SCROLLBAR_WIDTH = 5;
 
-    public static void drawSeparator(GuiGraphicsExtractor g, int x, int y, int w) {
+    public static void drawSeparator(GuiGraphics g, int x, int y, int w) {
         g.horizontalLine(x, x + w, y, DIVIDER);
     }
 
-    public static void drawLeftAccentBar(GuiGraphicsExtractor g, int x, int y, int h, int color) {
+    public static void drawLeftAccentBar(GuiGraphics g, int x, int y, int h, int color) {
         g.fill(x, y, x + 3, y + h, color);
     }
 
-    public static void drawStatusDot(GuiGraphicsExtractor g, int x, int y, int color) {
+    public static void drawStatusDot(GuiGraphics g, int x, int y, int color) {
         g.fill(x, y, x + 7, y + 7, color);
     }
 
@@ -61,7 +61,7 @@ public class Theme {
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 
-    public static void fillRounded(GuiGraphicsExtractor g, int x, int y, int w, int h, int radius, int color) {
+    public static void fillRounded(GuiGraphics g, int x, int y, int w, int h, int radius, int color) {
         int r = Math.max(0, Math.min(radius, Math.min(w, h) / 2));
         if (r <= 1) {
             g.fill(x, y, x + w, y + h, color);
@@ -77,23 +77,23 @@ public class Theme {
         }
     }
 
-    public static void fillCard(GuiGraphicsExtractor g, int x, int y, int w, int h, boolean hovered) {
+    public static void fillCard(GuiGraphics g, int x, int y, int w, int h, boolean hovered) {
         int bg = hovered ? BG_ENTRY_HOVER : BG_ENTRY;
         fillRounded(g, x, y, w, h, 6, bg);
         g.outline(x, y, w, h, hovered ? BORDER_HOVER : BORDER);
     }
 
-    public static void fillPanel(GuiGraphicsExtractor g, int x, int y, int w, int h) {
+    public static void fillPanel(GuiGraphics g, int x, int y, int w, int h) {
         fillRounded(g, x, y, w, h, 6, BG_PANEL);
         g.outline(x, y, w, h, BORDER);
     }
 
-    public static void fillPanelGradient(GuiGraphicsExtractor g, int x, int y, int w, int h) {
+    public static void fillPanelGradient(GuiGraphics g, int x, int y, int w, int h) {
         g.fillGradient(x, y, x + w, y + h, BG_PANEL, BG_MAIN);
         g.outline(x, y, w, h, BORDER);
     }
 
-    public static void fillInput(GuiGraphicsExtractor g, int x, int y, int w, int h, boolean focused) {
+    public static void fillInput(GuiGraphics g, int x, int y, int w, int h, boolean focused) {
         fillRounded(g, x, y, w, h, 4, focused ? BG_INPUT_FOCUS : BG_INPUT);
         g.outline(x, y, w, h, focused ? BORDER_FOCUS : BORDER);
     }

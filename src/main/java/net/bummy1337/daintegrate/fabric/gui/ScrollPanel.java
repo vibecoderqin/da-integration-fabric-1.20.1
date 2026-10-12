@@ -1,7 +1,7 @@
 package net.bummy1337.daintegrate.fabric.gui;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.CharacterEvent;
@@ -42,7 +42,7 @@ public class ScrollPanel<T extends IEntry> extends AbstractWidget {
         this.setHeight(bottom - y);
     }
 
-    public void drawPanel(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
+    public void drawPanel(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         if (-scrollPosition > contentHeight - visualHeight)
             scrollPosition = -(contentHeight - visualHeight);
 
@@ -126,7 +126,7 @@ public class ScrollPanel<T extends IEntry> extends AbstractWidget {
     }
 
     @Override
-    protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+    protected void extractWidgetRenderState(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render.Cate
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render.HeaderRenderer;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.search.SearchHandler;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.search.SearchRenderer;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 
@@ -88,26 +88,26 @@ public class BackgroundComponent {
         searchHandler.updateAnimations(deltaTime);
     }
 
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, String selectedCategory, float delta, float alphaMultiplier) {
+    public void render(GuiGraphics g, float bgX, float bgY, String selectedCategory, float delta, float alphaMultiplier) {
         updateAnimations(selectedCategory, delta);
         backgroundRenderer.render(g, bgX, bgY, BG_WIDTH, BG_HEIGHT, alphaMultiplier);
         avatarRenderer.render(g, bgX, bgY, alphaMultiplier);
     }
 
-    public void renderCategoryPanel(GuiGraphicsExtractor g, float bgX, float bgY, float alphaMultiplier) {
+    public void renderCategoryPanel(GuiGraphics g, float bgX, float bgY, float alphaMultiplier) {
         backgroundRenderer.renderCategoryPanel(g, bgX, bgY, BG_HEIGHT, alphaMultiplier);
     }
 
-    public void renderHeader(GuiGraphicsExtractor g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
+    public void renderHeader(GuiGraphics g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
         headerRenderer.render(g, bgX, bgY, BG_WIDTH, selectedCategory, previousCategory, currentCategory,
                 headerTransition, searchHandler, alphaMultiplier);
     }
 
-    public void renderCategoryNames(GuiGraphicsExtractor g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
+    public void renderCategoryNames(GuiGraphics g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
         categoryRenderer.render(g, bgX, bgY, selectedCategory, alphaMultiplier);
     }
 
-    public void renderSearchResults(GuiGraphicsExtractor g, float bgX, float bgY, float mouseX, float mouseY, int guiScale, float alphaMultiplier) {
+    public void renderSearchResults(GuiGraphics g, float bgX, float bgY, float mouseX, float mouseY, int guiScale, float alphaMultiplier) {
         searchRenderer.render(g, bgX, bgY, BG_WIDTH, BG_HEIGHT, mouseX, mouseY, guiScale, alphaMultiplier);
     }
 
