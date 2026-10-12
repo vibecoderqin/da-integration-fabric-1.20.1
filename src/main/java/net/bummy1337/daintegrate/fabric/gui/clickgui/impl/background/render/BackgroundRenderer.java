@@ -2,10 +2,10 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render;
 
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class BackgroundRenderer {
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, float bgWidth, float bgHeight, float alphaMultiplier) {
+    public void render(GuiGraphics g, float bgX, float bgY, float bgWidth, float bgHeight, float alphaMultiplier) {
         int tl = Theme.withAlpha(Theme.BG_MAIN, alphaMultiplier);
         int br = Theme.withAlpha(Theme.BG_DARK, alphaMultiplier);
         RenderHelper.roundedRect(g, bgX, bgY, bgWidth, bgHeight, 10f, tl);
@@ -13,7 +13,7 @@ public class BackgroundRenderer {
         RenderHelper.roundedOutline(g, bgX, bgY, bgWidth, bgHeight, 10f, Theme.withAlpha(Theme.BORDER, alphaMultiplier));
     }
 
-    public void renderCategoryPanel(GuiGraphicsExtractor g, float bgX, float bgY, float bgHeight, float alphaMultiplier) {
+    public void renderCategoryPanel(GuiGraphics g, float bgX, float bgY, float bgHeight, float alphaMultiplier) {
         float x = bgX + 7.5f;
         float y = bgY + 7.5f;
         float w = 80;

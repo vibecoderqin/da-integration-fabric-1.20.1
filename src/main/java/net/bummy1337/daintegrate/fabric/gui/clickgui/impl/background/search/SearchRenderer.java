@@ -3,7 +3,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.search;
 import net.bummy1337.daintegrate.configurations.TriggerDto;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class SearchRenderer {
         this.searchHandler = searchHandler;
     }
 
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, float bgWidth, float bgHeight,
+    public void render(GuiGraphics g, float bgX, float bgY, float bgWidth, float bgHeight,
                        float mouseX, float mouseY, int guiScale, float alphaMultiplier) {
 
         if (searchHandler.getSearchPanelAlpha() <= 0.01f) return;
@@ -42,7 +42,7 @@ public class SearchRenderer {
         renderScrollIndicators(g, panelX, panelY, panelW, panelH, resultAlpha);
     }
 
-    private void renderPanelBackground(GuiGraphicsExtractor g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
+    private void renderPanelBackground(GuiGraphics g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
         int panelBg = Theme.withAlpha(Theme.BG_PANEL, resultAlpha);
         int outlineColor = Theme.withAlpha(Theme.BORDER, resultAlpha);
 
@@ -50,7 +50,7 @@ public class SearchRenderer {
         RenderHelper.roundedOutline(g, panelX, panelY, panelW, panelH, 8f, outlineColor);
     }
 
-    private void renderEmptyState(GuiGraphicsExtractor g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
+    private void renderEmptyState(GuiGraphics g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
         String noResults = searchHandler.getSearchText().isEmpty() ? "Start typing to search..." : "No triggers found";
         float textWidth = RenderHelper.textWidth(noResults, 6f);
         float centerX = panelX + (panelW - textWidth) / 2f;
@@ -59,7 +59,7 @@ public class SearchRenderer {
         RenderHelper.text(g, noResults, centerX, centerY, 6f, textColor);
     }
 
-    private void renderResults(GuiGraphicsExtractor g, float panelX, float panelY, float panelW, float panelH,
+    private void renderResults(GuiGraphics g, float panelX, float panelY, float panelW, float panelH,
                                float mouseX, float mouseY, float resultAlpha) {
 
         List<TriggerDto> results = searchHandler.getSearchResults();
@@ -97,7 +97,7 @@ public class SearchRenderer {
         searchHandler.setHoveredSearchIndex(newHoveredIndex);
     }
 
-    private void renderResultItem(GuiGraphicsExtractor g, TriggerDto trigger, float panelX, float itemY, float panelW,
+    private void renderResultItem(GuiGraphics g, TriggerDto trigger, float panelX, float itemY, float panelW,
                                   float resultHeight, float itemOffsetX, float itemAlpha,
                                   boolean hovered, boolean selected) {
 
@@ -137,7 +137,7 @@ public class SearchRenderer {
         }
     }
 
-    private void renderScrollIndicators(GuiGraphicsExtractor g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
+    private void renderScrollIndicators(GuiGraphics g, float panelX, float panelY, float panelW, float panelH, float resultAlpha) {
         List<TriggerDto> results = searchHandler.getSearchResults();
         float resultHeight = searchHandler.getSearchResultHeight();
         float maxScroll = Math.max(0, results.size() * (resultHeight + 2) - panelH + 10);

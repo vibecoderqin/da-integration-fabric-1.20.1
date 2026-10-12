@@ -3,13 +3,13 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render;
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.search.SearchHandler;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class HeaderRenderer {
 
     private static final float HEADER_SLIDE_DISTANCE = 8f;
 
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, float bgWidth, String selectedCategory,
+    public void render(GuiGraphics g, float bgX, float bgY, float bgWidth, String selectedCategory,
                        String previousCategory, String currentCategory, float headerTransition,
                        SearchHandler searchHandler, float alphaMultiplier) {
         renderHeaderPanel(g, bgX, bgY, bgWidth, alphaMultiplier);
@@ -17,7 +17,7 @@ public class HeaderRenderer {
         renderCategoryLabel(g, bgX, bgY, previousCategory, currentCategory, headerTransition, searchHandler, alphaMultiplier);
     }
 
-    private void renderHeaderPanel(GuiGraphicsExtractor g, float bgX, float bgY, float bgWidth, float alphaMultiplier) {
+    private void renderHeaderPanel(GuiGraphics g, float bgX, float bgY, float bgWidth, float alphaMultiplier) {
         float x = bgX + 92f;
         float y = bgY + 7.5f;
         float w = bgWidth - 100f;
@@ -27,7 +27,7 @@ public class HeaderRenderer {
         RenderHelper.roundedOutline(g, x, y, w, h, 7f, Theme.withAlpha(Theme.BORDER, alphaMultiplier));
     }
 
-    private void renderSearchBox(GuiGraphicsExtractor g, float bgX, float bgY, float bgWidth, SearchHandler searchHandler, float alphaMultiplier) {
+    private void renderSearchBox(GuiGraphics g, float bgX, float bgY, float bgWidth, SearchHandler searchHandler, float alphaMultiplier) {
         float searchBoxX = bgX + bgWidth - 98f;
         float searchBoxY = bgY + 12f;
         float searchBoxW = 88f;
@@ -53,7 +53,7 @@ public class HeaderRenderer {
         RenderHelper.rect(g, searchBoxX + searchBoxW - 18, searchBoxY + 4f, 1, searchBoxH - 8, Theme.withAlpha(Theme.TEXT_MUTED, alphaMultiplier));
     }
 
-    private void renderSearchText(GuiGraphicsExtractor g, float searchBoxX, float searchBoxY, float searchBoxW, float searchBoxH,
+    private void renderSearchText(GuiGraphics g, float searchBoxX, float searchBoxY, float searchBoxW, float searchBoxH,
                                   float textAreaX, SearchHandler searchHandler, float alphaMultiplier) {
         RenderHelper.enableScissor(g, searchBoxX + 3, searchBoxY, searchBoxW - 20, searchBoxH);
 
@@ -70,7 +70,7 @@ public class HeaderRenderer {
         }
     }
 
-    private void renderSearchSelection(GuiGraphicsExtractor g, float textAreaX, float searchBoxY, float searchBoxH,
+    private void renderSearchSelection(GuiGraphics g, float textAreaX, float searchBoxY, float searchBoxH,
                                        SearchHandler searchHandler, float alphaMultiplier) {
         int start = searchHandler.getSearchSelectionStart();
         int end = searchHandler.getSearchSelectionEnd();
@@ -85,7 +85,7 @@ public class HeaderRenderer {
                 Theme.withAlpha(Theme.ACCENT, selAlpha));
     }
 
-    private void renderSearchCursor(GuiGraphicsExtractor g, float textAreaX, float searchBoxY, float searchBoxH,
+    private void renderSearchCursor(GuiGraphics g, float textAreaX, float searchBoxY, float searchBoxH,
                                     SearchHandler searchHandler, float alphaMultiplier) {
         float cursorAlpha = (float) (Math.sin(searchHandler.getSearchCursorBlink() * Math.PI * 2) * 0.5 + 0.5);
         if (cursorAlpha > 0.3f) {
@@ -97,7 +97,7 @@ public class HeaderRenderer {
         }
     }
 
-    private void renderSearchPlaceholder(GuiGraphicsExtractor g, float searchBoxX, float searchBoxY, float searchBoxH,
+    private void renderSearchPlaceholder(GuiGraphics g, float searchBoxX, float searchBoxY, float searchBoxH,
                                          float textAreaX, SearchHandler searchHandler, float alphaMultiplier, boolean showCursor) {
         RenderHelper.text(g, "Type to search...", textAreaX, searchBoxY + 5f, 5,
                 Theme.withAlpha(Theme.TEXT_MUTED, alphaMultiplier));
@@ -112,7 +112,7 @@ public class HeaderRenderer {
         }
     }
 
-    private void renderCategoryLabel(GuiGraphicsExtractor g, float bgX, float bgY, String previousCategory,
+    private void renderCategoryLabel(GuiGraphics g, float bgX, float bgY, String previousCategory,
                                      String currentCategory, float headerTransition, SearchHandler searchHandler,
                                      float alphaMultiplier) {
         float baseX = bgX + 100f;

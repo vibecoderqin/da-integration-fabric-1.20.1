@@ -2,7 +2,7 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render;
 
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +51,7 @@ public class CategoryRenderer {
         }
     }
 
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
+    public void render(GuiGraphics g, float bgX, float bgY, String selectedCategory, float alphaMultiplier) {
         renderSingleTopItem(g, bgX, bgY, alphaMultiplier);
         renderSectionHeader(g, bgX, bgY + 70f, "Categories", alphaMultiplier);
         renderMainCategories(g, bgX, bgY, alphaMultiplier);
@@ -59,7 +59,7 @@ public class CategoryRenderer {
         renderExtraCategories(g, bgX, bgY, alphaMultiplier);
     }
 
-    private void renderSectionHeader(GuiGraphicsExtractor g, float bgX, float sectionY, String title, float alphaMultiplier) {
+    private void renderSectionHeader(GuiGraphics g, float bgX, float sectionY, String title, float alphaMultiplier) {
         float lineWidth = 14f;
         float textWidth = RenderHelper.textWidth(title, SECTION_TEXT_SIZE);
         float totalWidth = 64f;
@@ -74,12 +74,12 @@ public class CategoryRenderer {
         RenderHelper.text(g, title, textX, sectionY - 1f, SECTION_TEXT_SIZE, Theme.withAlpha(Theme.TEXT_MUTED, textAlpha));
     }
 
-    private void renderSingleTopItem(GuiGraphicsExtractor g, float bgX, float bgY, float alphaMultiplier) {
+    private void renderSingleTopItem(GuiGraphics g, float bgX, float bgY, float alphaMultiplier) {
         float animation = categoryAnimations.getOrDefault(MAIN_CATEGORIES[0], 0f);
         renderCategoryItem(g, bgX, bgY + 52f, MAIN_CATEGORIES[0], MAIN_CATEGORY_ICONS[0], animation, alphaMultiplier);
     }
 
-    private void renderMainCategories(GuiGraphicsExtractor g, float bgX, float bgY, float alphaMultiplier) {
+    private void renderMainCategories(GuiGraphics g, float bgX, float bgY, float alphaMultiplier) {
         for (int i = TRIGGER_SECTION_START; i <= TRIGGER_SECTION_END; i++) {
             String cat = MAIN_CATEGORIES[i];
             float animation = categoryAnimations.getOrDefault(cat, 0f);
@@ -88,7 +88,7 @@ public class CategoryRenderer {
         }
     }
 
-    private void renderExtraCategories(GuiGraphicsExtractor g, float bgX, float bgY, float alphaMultiplier) {
+    private void renderExtraCategories(GuiGraphics g, float bgX, float bgY, float alphaMultiplier) {
         for (int i = EXTRA_SECTION_START; i < MAIN_CATEGORIES.length; i++) {
             String cat = MAIN_CATEGORIES[i];
             float animation = categoryAnimations.getOrDefault(cat, 0f);
@@ -97,7 +97,7 @@ public class CategoryRenderer {
         }
     }
 
-    private void renderCategoryItem(GuiGraphicsExtractor g, float bgX, float textY, String name, String icon,
+    private void renderCategoryItem(GuiGraphics g, float bgX, float textY, String name, String icon,
                                     float animation, float alphaMultiplier) {
         float offsetX = animation * MAX_OFFSET;
 

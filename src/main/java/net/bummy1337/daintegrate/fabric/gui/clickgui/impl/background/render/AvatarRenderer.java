@@ -2,14 +2,14 @@ package net.bummy1337.daintegrate.fabric.gui.clickgui.impl.background.render;
 
 import net.bummy1337.daintegrate.fabric.gui.Theme;
 import net.bummy1337.daintegrate.fabric.gui.clickgui.impl.RenderHelper;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class AvatarRenderer {
 
     private static final String MOD_NAME = "DA INTEGRATE";
     private static final String MOD_VERSION = "1.2";
 
-    public void render(GuiGraphicsExtractor g, float bgX, float bgY, float alphaMultiplier) {
+    public void render(GuiGraphics g, float bgX, float bgY, float alphaMultiplier) {
         int alpha = (int) (255 * alphaMultiplier);
         int alphaBg = (int) (105 * alphaMultiplier);
         int alphaText = (int) (200 * alphaMultiplier);
